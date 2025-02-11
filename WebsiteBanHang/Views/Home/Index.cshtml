@@ -1,0 +1,236 @@
+﻿@model IEnumerable<WebsiteBanHang.Models.SanPham>
+@{
+    ViewBag.Title = "Home Page";
+}
+<!-- menu -->
+<nav id="menu">
+
+    <ul>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-dog"></i>
+                Thức ăn cho chó
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-cat"></i>
+                Thức ăn cho mèo
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-house-chimney"></i>
+                Nhà cho chó
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-house-chimney"></i>
+                Khay vs cho mèo
+            </a>
+        </li>
+        <li>
+            @*@{
+                    var user = HttpContext.Current.Session["user"].ToString();
+                    <span>@user</span>
+                }*@
+            @if (User.Identity.IsAuthenticated)
+            {
+
+            <li><a>Hello - @User.Identity.Name </a></li>
+
+            <li> @Html.ActionLink("Đăng xuất", "Logout", "Accounts")</li>
+        }
+        else
+        {
+            <li><a href="@Url.Action("Login","Accounts/Login")"><i class="fas fa-sign-in-alt"></i> Đăng Nhập </a></li>
+        }
+            </li>
+        </ul>
+    </nav>
+
+    <!-- menu-->
+
+    <div class="body">
+        <div class="grid">
+            <nav class="banner">
+                <ul class="right-banner" style="margin-left: 0px;">
+                    <li class="right-banner-items">
+                        <h1>Hệ thống shop cửa hàng thú cưng <br> PET MART</h1><p class="right-banner-paragraph">
+                            <a style="color: blue;" href="index.html">Pet Mart</a> là chuỗi pet shop thú cưng <a href="index.html" style="color: blue;">
+                                Đồ cho chó –
+                                Đồ cho mèo
+                            </a> tại Thành phố Hồ Chí Minh, Hà Nội, Đà Nẵng và Hải Phòng với hệ thống nhiều chi nhánh cửa hàng thú cưng chuyên cung cấp vật dụng,
+                            quần áo, thức ăn, sữa tắm, chuồng, vòng cổ xích và các phụ kiện dành cho vật nuôi cảnh…
+                        </p>
+                        <p class="right-banner-paragraph">
+                            Là điểm đến hàng đầu tại Việt Nam chuyên cung cấp các dịch vụ tắm spa, chăm sóc, cắt tỉa lông và trông giữ thú cưng chuyên nghiệp.
+                            Với chất lượng dịch vụ tốt nhất luôn được khách hàng tin tưởng và đánh giá cao.
+                        </p></p>
+                    </li>
+                </ul>
+
+                <ul class="left-banner" style="margin-left: 82px;">
+                    <video style="scroll-margin-top: 20px;" src="~/Content/video/welcome.mp4" type="video/mp4" autoplay="autoplay" controls></video>
+                </ul>
+            </nav>
+
+
+
+
+            <!-- --sản phẩm-- -->
+            <section class="main-hotdeal">
+                <ul class="main-title">
+                    <li><h2 style="margin-left: -23px;">SẢN PHẨM BÁN CHẠY </h2></li>
+                    <li><a href="@Url.Action("AllProduct","Product")">Xem tất cả sản phẩm</a></li>
+                </ul>
+                <div class="container">
+                    <div class="main-hotdeal-content">
+
+
+                        <div class="main-hotdeal-content-items">
+                            @foreach (var item in Model)
+                            {
+                                <div class="main-hotdeal-content-item">
+                                    <a href="@Url.Action("Detail","Detail" ,new {id =item.IdSP })" class="phonename">
+
+                                        <img src="~/Content/img/@item.img" alt="">
+                                    </a>
+
+                                    <div class="phonename"><a href="@Url.Action("Detail","Detail",new {id=item.IdSP })">@item.TenSP</a></div>
+                                    <ul class="main-hotdeal-content-item-text">
+                                        <li class="gia">175.000 <span>₫</span></li>
+                                        <li><a style="font-weight:700;color:rgb(67, 33, 187);font-size:16px" href="@Url.Action( "Additem", "ShoppingCart", new { id = item.IdSP }, null)"><i class="fa-solid fa-cart-shopping"></i></a></li>
+
+                                    </ul>
+                                    <div class="yeuthich" style="float: right;">Yêu thích <i class="fa-regular fa-heart"></i></div>
+                                </div>
+                            }
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+
+
+            <div class="main-title">
+                <h2>HỆ THỐNG CỬA HÀNG </h2>
+            </div>
+            <div class="gird">
+                <nav class="bot-container">
+                    <ul class="bot-container-right">
+                        <li class="right-title"><span class="right-title-icon">📍 Pet Mart tại Hà Nội (12) </span></li>
+                        <li class="bot-container-right-address"><b>3 Đại Cồ Việt</b>, Phường Cầu Dền, Quận Hai Bà Trưng</li>
+                        <li class="bot-container-right-address"><b>476 Minh Khai</b>, Phường Vĩnh Tuy, Quận Hai Bà Trưng</li>
+                        <li class="bot-container-right-address"><b>83 Nghi Tàm</b>, Phường Yên Phụ, Quận Tây Hồ</li>
+                        <li class="bot-container-right-address"><b>206 Kim Mã</b>, Phường Kim Mã, Quận Ba Đình</li>
+                        <li class="bot-container-right-address"><b>18 Chả Cá</b>, Phường Hàng Đào, Quận Hoàn Kiếm</li>
+                        <li class="bot-container-right-address"><b>242 Nguyễn Trãi</b>, Phường Thanh Xuân Trung, Quận Thanh Xuân</li>
+                        <li class="bot-container-right-address"><b>290 Nguyễn Văn Cừ</b>, Phường Bồ Đề, Quận Long Biên</li>
+                        <li class="bot-container-right-address"><b>81 Quang Trung</b>, Phường Quang Trung, Quận Hà Đông</li>
+                        <li class="bot-container-right-address"><b>Villa E10 Đỗ Đình Thiện</b>, Phường Mỹ Đình, Quận Nam Từ Liêm</li>
+                        <li class="bot-container-right-address"><b>SH12A - S2.03 Vinhomes Smart City</b>, Phường Tây Mỗ, Quận Nam Từ Liêm</li>
+                        <li class="bot-container-right-address"><b>SH02 - S2.08 Vinhomes Ocean Park</b>, Xã Đa Tốn, Huyện Gia Lâm</li>
+
+                        <li class="right-title"><span class="right-title-icon">📍 Pet Mart tại Đà Nẵng (1)</span></li>
+                        <li class="bot-container-right-address"><b>151 Nguyễn Văn Linh</b>, Phường Nam Dương, Quận Hải Châu</li>
+
+                        <li class="right-title"><span class="right-title-icon">📍 Pet Mart tại Hải Phòng (1)</span></li>
+                        <li class="bot-container-right-address"><b>177 Tô Hiệu</b>, Phường Trại Cau, Quận Lê Chân</li>
+                    </ul>
+                    <div class="space"></div>
+
+                    <ul class="bot-container-right">
+                        <li class="right-title"><span class="right-title-icon">📍 Pet Mart tại TP.Hồ Chí Minh (19) </span></li>
+                        <li class="bot-container-right-address"><b>244 Khánh Hội</b>,Phường 6, Quận 4</li>
+                        <li class="bot-container-right-address"><b>347 Nguyễn Trãi</b>, Phường 7, Quận 5</li>
+                        <li class="bot-container-right-address"><b>180 Hậu Giang, Phường 6</b>, Quận 6</li>
+                        <li class="bot-container-right-address"><b>489 Nguyễn Thị Thập</b>, Phường Tân Phong, Quận 7</li>
+                        <li class="bot-container-right-address"><b>84 Phan Khiêm Ích</b>, Phường Tân Phong, Quận 7 </li>
+                        <li class="bot-container-right-address"><b>378 Phạm Hùng</b>, Phường 5, Quận 8</li>
+                        <li class="bot-container-right-address"><b>116 Ba Tháng Hai</b>, Phường 12, Quận 10</li>
+                        <li class="bot-container-right-address"><b>257 Lê Đại Hành</b>, Phường 13, Quận 11</li>
+                        <li class="bot-container-right-address"><b>1387 Nguyễn Ảnh Thủ</b>, Phường Trung Mỹ Tây, Quận 12</li>
+                        <li class="bot-container-right-address"><b>252 Quang Trung</b>, Phường 10, Quận Gò Vấp</li>
+                        <li class="bot-container-right-address"><b>217 Phan Đăng Lưu</b>, Phường 1, Quận Phú Nhuận</li>
+                        <li class="bot-container-right-address"><b>179 Xô Viết Nghệ Tĩnh</b>, Phường 17, Quận Bình Thạnh</li>
+                        <li class="bot-container-right-address"><b>359 Lũy Bán Bích</b>, Phường Hiệp Tân, Quận Tân Phú</li>
+                        <li class="bot-container-right-address"><b>38 Đường 17A</b>, Phường Bình Trị Đông B, Quận Bình Tân</li>
+                        <li class="bot-container-right-address"><b>779 Lê Trọng Tấn</b>, Phường Bình Hưng Hòa, Quận Bình Tân</li>
+                        <li class="bot-container-right-address"><b>284 Võ Văn Ngân</b>, Phường Bình Thọ, TP. Thủ Đức</li>
+                        <li class="bot-container-right-address"><b>544 Lê Văn Việt</b>, Phường Long Thạnh Mỹ, TP. Thủ Đức</li>
+                        <li class="bot-container-right-address"><b>150 Đỗ Xuân Hợp</b>, Phường Phước Long A, TP. Thủ Đức</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="main-title">
+                <h2>KINH NGHIỆM CHIA SẺ </h2>
+            </div>
+            <div class="grid">
+                <nav class="fot-container">
+                    <div class="fot-container-items">
+                        <div class="fot-container-item">
+                            <a href="" class="phonename">
+                                <img src="~/Content/img/kn1.jpg" alt="">
+                            </a>
+                            <ul class="fot-text">
+                                <li class="fot-name"><b>7 cách trị rận cho mèo hiệu quả</b></li>
+                                <li class="mota">Trong cuộc sống hàng ngày của người nuôi mèo,việc áp dụng cách trị rận mèo cho mèo tại nhà là... </li>
+                        </div>
+
+                        <div class="fot-container-item">
+                            <a href="@*@Url.Action(" Detail",new {id=dienthoai.IdSP })*@" class="phonename">
+                                <img src="~/Content/img/kn2.jpg" alt="">
+                            </a>
+                            <ul class="fot-text">
+                                <li class="fot-name"><b>Cách sử dụng thuốc tẩy giun cho mèo hiệu quả</b></li>
+                                <li class="mota">Việc hiểu rõ về tẩy giun cho mèo, dấu hiệu, cách sử dụng thuốc tẩy giun cho mèo giúp điều ... </li>
+                        </div>
+
+                        <div class="fot-container-item">
+                            <a href="@*@Url.Action(" Detail",new {id=dienthoai.IdSP })*@" class="phonename">
+                                <img src="~/Content/img/kn3.jpg" alt="">
+                            </a>
+                            <ul class="fot-text">
+                                <li class="fot-name"><b>15 loại thuốc nhỏ mắt cho mèo được thú y khuyên dùng</b></li>
+                                <li class="mota">Trên thị trường hiện có nhiều loại thuốc nhỏ mắt cho mèo để lựa chọn dù mắt mèo của bạn ... </li>
+                        </div>
+
+                        <div class="fot-container-item">
+                            <a href="@*@Url.Action(" Detail",new {id=dienthoai.IdSP })*@" class="phonename">
+                                <img src="~/Content/img/kn4.jpg" alt="">
+                            </a>
+                            <ul class="fot-text">
+                                <li class="fot-name"><b>3 cách trị ve chó và diệt bọ chét chó hiệu quả nhất</b></li>
+                                <li class="mota">Bọ chét và ve chó là 2 loại ký sinh trùng thường gặp mang đến rủi ro sức khỏe cho ...</li>
+                        </div>
+
+                        <div class="fot-container-item">
+                            <a href="@*@Url.Action(" Detail",new {id=dienthoai.IdSP })*@" class="phonename">
+                                <img src="~/Content/img/kn5.jpg" alt="">
+                            </a>
+                            <ul class="fot-text">
+                                <li class="fot-name"><b>Chỉ từng bước cách cắt móng cho mèo dễ dàng</b></li>
+                                <li class="mota">Cắt móng cho mèo không chỉ giúp giữ cho đồ vật trong nhà của bạn khỏi bị trầy xước mà ... </li>
+                        </div>
+
+                        <div class="fot-container-item">
+                            <a href="@*@Url.Action(" Detail",new {id=dienthoai.IdSP })*@" class="phonename">
+                                <img src="~/Content/img/kn6.jpg" alt="">
+                            </a>
+                            <ul class="fot-text">
+                                <li class="fot-name"><b>25 bài học huấn luyện chó tại nhà ai cũng làm được</b></li>
+                                <li class="mota">25 bài học huấn luyện chó tại nhà ai cũng làm được</li>
+                        </div>
+
+
+                    </div>
+                </nav>
+            </div>
+
+        </div>
+    </div>

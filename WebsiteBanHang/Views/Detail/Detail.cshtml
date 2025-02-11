@@ -1,0 +1,61 @@
+﻿
+@model WebsiteBanHang.Models.SanPham
+@{
+    ViewBag.Title = "Detail";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm</title>
+    <link rel="stylesheet" href="~/Content/css/detail.css">
+    <link rel="stylesheet" href="~/Content/css/base.css">
+    <link rel="stylesheet" href="~/Content/css/main.css">
+
+</head>
+<body>
+
+
+
+
+    <div class="body">
+
+        <nav class="body-main">
+            <div class="body-main-items">
+                <ul class="product-detail" style="margin-left: 0px;">
+                    <li class="right-product-items"><img src="~/Content/img/@Model.img" alt=""></li>
+                </ul>
+
+                <ul class="main">
+                    <li class="main-right"><b>@Model.TenSP</b></li>
+                    <li class="gia" style="font-size: 26px;"><span style="color: black; font-size: 16px;">Giá bán:</span> @Model.GiaSP <span>₫</span></li>
+                    <li><button ><a style="text-decoration:none" href="@Url.Action( "Additem", "ShoppingCart", new { id = @Model.IdSP }, null)">Add to card</a> <i class="fa-solid fa-cart-shopping"></i></button></li>
+                </ul>
+            </div>
+
+            <nav class="mota">
+                <h3 class="mota-title">Mô tả</h3>
+                <p>
+                    @Model.Mota
+                </p>
+                <h3 class="mota-title">Thành phần dinh dưỡng</h3>
+                <p>
+                    @Model.ThanhPhan
+                </p>
+                <h3 class="mota-title">Hướng dẫn sử dụng</h3>
+                <p>
+                    @Model.HDSD
+            </nav>
+        </nav>
+
+
+
+    </div>
+
+
+
+</body>
+</html>
+

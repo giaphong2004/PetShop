@@ -1,0 +1,504 @@
+.top-header{
+    height: 29px;
+    background-color: #000;
+
+}
+
+/* menu */
+
+.body {
+    margin-top: 156px;
+}
+
+#menu {
+    margin-left: -31px;
+    position: fixed;
+    width:150px;
+    height: 100%;
+    background-color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    z-index: 1000;
+    transition: ease-in-out 0.5s;
+    margin-top: -27.5px;
+}
+
+nav.hide {
+    width: 0;
+}
+
+#menu ul {
+    margin-top: -120px;
+    margin-left: -20px;
+    overflow: hidden;
+}
+
+    #menu ul li {
+        list-style: none;
+    }
+
+        #menu ul li a {
+            width: 100%;
+            color: #1e90ff;
+            font-size: 18px;
+            line-height: 20px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            padding: 15px;
+            /* transition: linear 0.5s; */
+        }
+
+            #menu ul li a i {
+                margin-right: 8px;
+                transition: linear 0.2s;
+            }
+
+            #menu ul li a:hover {
+                background-color: #1e90ff;
+                color: white;
+            }
+
+                #menu ul li a:hover i {
+                    color: white;
+                }
+
+nav .toggle_menu {
+    position: absolute;
+    top: 20px;
+    right: -46px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f1f1f1;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    transition: linear 0.2s;
+}
+
+    nav .toggle_menu i {
+        color: #1e90ff;
+        font-size: 1.5rem;
+        transition: linear 0.2s;
+    }
+
+    nav .toggle_menu:hover {
+        background-color: #1e90ff;
+    }
+
+        nav .toggle_menu:hover i {
+            color: white;
+        }
+/* menu */
+
+body {
+    scroll-padding-top: 129px; /* Giá trị chiều cao của header */
+}
+
+
+.header__navbar {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;       
+}
+.header__navbar h3{
+    color: white;
+    margin-top: -18px;
+    margin-left: 550px;
+    font-size: 13.44px;
+}
+
+.header__navbar  i{
+    font-size: 1.5em;
+    color: #fff;    
+}
+
+.header__navbar-list {
+    padding-left: 0;
+}
+
+.header__navbar-item{
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.header__navbar-list2{
+    margin-top: 8.9px;
+    
+}
+
+.bottom-header{
+    height: 100px;
+    background-color: blue; 
+    padding-top: 10px;  
+}
+
+
+/* cố định header */
+.header{
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.body{
+    margin-top: 156px;
+}
+
+/*  */
+.header__botbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__navbar-list2 :hover{
+    background-color:#999
+}
+
+#logo{
+    max-height: 100px;
+    width: 230px;
+}
+
+#search{
+    margin: 10px  auto;
+  width: 1000px;
+  height: 44px;
+  border-radius: 5px;
+  border-style: none;
+}
+
+.header__botbar #menu{
+    width: 45px;
+    height: 45px;
+    margin-left: 0px;
+    background-color: rgb(10, 36, 180);
+    border-radius: 0px;
+    color: #fff;
+    border-radius: 0 10 0 10;
+}
+
+.header__navbar-list3 .fa-solid {
+    margin-left: -50px;
+    padding: 15px
+}
+
+.header__navbar-list3 .header__navbar-item1{
+    float: right;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+
+.hedaer__botbar2-list{
+    list-style: none;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 12px;
+   
+}
+
+
+.header__botbar2-items a{
+    color:#fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.container{
+    margin-left: 55px;
+    margin-top: 20px;
+}
+
+.right-banner{
+    border:.2rem solid #eee;
+    border-radius: .8rem;
+    height: 439px;
+    width: 755px;
+    text-align: center;
+    list-style: none;
+}
+
+.right-banner h1{
+    font-size: 35px;
+    line-height: normal;
+    
+}
+
+.right-banner a{
+    text-decoration: none;
+}
+
+.right-banner-paragraph{
+    text-align: left;
+    line-height: 30px;
+    font-size: 175%;
+}
+
+.left-banner{
+    border:.2rem solid #eee;
+    border-radius: .8rem;
+    height: 439px;
+    width: 755px;
+    margin-left: -40px;
+
+}
+
+.left-banner video{
+    width: 700px;
+    height: 400px;
+    margin: 18px -14px;
+    border-radius: 20px;
+}
+
+
+.banner{
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+
+
+
+/* sản phẩm */
+.main-hotdeal{
+    margin-top: 20px;
+}
+
+.main-hotdeal-content-items{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    margin-left: -35px;
+}
+
+.space{
+    width: 100px;
+    height: 3px;
+    
+}
+
+.main-hotdeal-content-item{
+    border: 1px groove ;
+    width: 19%;
+    padding: 10px 12px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+   
+}
+
+/* .main-hotdeal-content-item:hover img{
+    transform: translateY(-10px);
+    
+} */
+.main-hotdeal-content-item img{
+    width: 250px;
+    transition: all 0.3s ease;
+}
+.main-hotdeal-content-item-text{
+    line-height: 25px;
+    font-family: sans-serif;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.gia{
+    color: rgb(215,0,24);
+    font-weight: 700;
+    font-size: 16px;
+    
+}
+
+.phonename a{
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgb(68,68,68); font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: auto 0;
+}
+.phonename a:hover{
+    color: rgb(223,30,57);
+}
+
+
+.yeuthich:hover i{
+    color:rgb(223,30,57);
+}
+
+.main-title {
+    border-bottom: .2rem solid #999;
+    font-size: 16px;
+    list-style: none;
+    margin: 30px 0px 30px 0px;
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.main-title a {
+        text-decoration: none;
+        color: #000DF7;
+        font-size: 23px;
+        font-weight: 500;
+        margin-bottom: 50px;
+        padding-left: 15px;
+}
+
+.bot-container-right {
+    border:.2rem solid #eee;
+    border-radius: 3.8rem;
+    width: 761px;
+    height: 842px;
+    background-color: #00205B;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.right-title{
+    font-size: 22px;
+    list-style: none;
+    font-weight: 500;
+    font-size: 22px;
+}
+
+.bot-container-right li{
+    margin-top: 20px;
+}
+
+.bot-container-right-address{
+    font-size: 18px;
+    margin-left: 20px;
+    margin-bottom: 27px;
+}
+
+
+.bot-container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* kinh nghiệm */
+.fot-container-items{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    margin-left: -20px;
+}
+
+
+.fot-container-item{
+   margin-bottom: 20px;
+    border: 1px groove ;
+    width: 30%;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 15px;
+
+}
+
+.fot-container-items img{
+    width: 467px;
+    height: 261px;
+}
+
+.fot-name{
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.fot-text{
+
+    list-style: none;
+    padding: 12px 20px 22px 20px;
+}
+
+.mota{
+    font-size: 16px;
+    line-height: 25px;
+}
+/* footer */
+.footer-bot{
+    height: 88px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #000DF7;
+}
+
+.footer-bot-items{
+   font-size: 20px;
+   color: #fff;
+  line-height: 50px;
+}
+
+.footer-bot a{
+    text-decoration: none;
+    color: #000DF7;
+    border:2px solid white;
+    background-color: #fff;
+    padding: 10px;
+    border-radius:20px ;
+
+}
+
+.footer-main{
+
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer-main-left{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 18px;
+
+}
+
+.footer-main-left a{
+    text-decoration: none;
+    color: #000;
+}
+
+.footer-main-right{
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+.footer-main-item1{
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+.footer-main-bottom{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.fotter-bottom-item5 img{
+    width: 70px;
+    height: 64px;
+}
+
+.fotter-bottom-item4 img{
+    width: 160px;
+    height: 53px;
+}
+
+.bottom-text {
+    font-size: 18px;
+    margin: 0px 55px 0px 125px;
+}

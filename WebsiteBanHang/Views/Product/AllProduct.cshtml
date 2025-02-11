@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "AllProduct";
+}
+<div class="body">
+<div class="container">
+    <div class="grid">
+        <div class="main-hotdeal-content-items">
+            @foreach (var item in Model)
+            {
+                <div class="main-hotdeal-content-item">
+                    <a href="@Url.Action("Detail","Detail",new {id=item.IdSP })" class="phonename">
+
+                        <img src="~/Content/img/@item.img" alt="">
+                    </a>
+
+                    <div class="phonename"><a href="@Url.Action("Detail","Detail",new {id=item.IdSP })">@item.TenSP</a></div>
+                    <ul class="main-hotdeal-content-item-text">
+                        <li class="gia">@item.GiaSP <span>₫</span></li>
+                        <li><a style="font-weight:700;color:rgb(67, 33, 187);font-size:16px" href=""><i class="fa-solid fa-cart-shopping"></i></a></li>
+
+                    </ul>
+                    <div class="yeuthich" style="float: right;">Yêu thích <i class="fa-regular fa-heart"></i></div>
+                </div>
+            }
+
+        </div>
+        </div>
+    </div>
+</div>

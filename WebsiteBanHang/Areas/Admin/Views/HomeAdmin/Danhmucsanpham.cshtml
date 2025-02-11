@@ -1,0 +1,81 @@
+﻿@model IEnumerable<WebsiteBanHang.Models.SanPham>
+
+@{
+    ViewBag.Title = "Danhmucsanpham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Danh mục sản phẩm</h2>
+
+<p>
+    <a class="text-decoration-none fw-bold text-dark" href="@Url.Action("Create","HomeAdmin")">Create New</a>
+    
+</p>
+<table class="table">
+    <tr class="table-warning">
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Hình ảnh
+        </th>
+        <th>
+            Giá sản phẩm
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Mota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThanhPhan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HDSD)
+        </th>*@
+        <th>
+           Loại sản phẩm
+        </th>
+        <th></th>
+    </tr>
+    @{ 
+        int i = 0;
+        string @cls = "table-success";
+    }
+
+@foreach (var item in Model) {
+    i = i + 1;
+    cls = "table-success";
+    if (i % 2 == 0)
+    {
+        cls = "table=primary";
+    }
+<tr class="@cls">
+    <td>
+        @Html.DisplayFor(modelItem => item.TenSP)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.img)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GiaSP)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Mota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThanhPhan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HDSD)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.Loai.LoaiSanPham)
+    </td>
+    <td class="text-decoration-none fw-bold text-dark">
+        @Html.ActionLink("Edit", "Edit", new { id = item.IdSP }) |
+        @Html.ActionLink("Details", "Details", new { id = item.IdSP }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.IdSP })
+    </td>
+</tr>
+}
+
+</table>

@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetMart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="~/Content/css/base.css">
+    <link rel="stylesheet" href="~/Content/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  
+</head>
+<body>
+   
+    <div class="app">
+        <div class="header">
+            <div class="top-header">
+                <div class="grid">
+                    <nav class="header__navbar">
+                        <ul class="header__navbar-list">
+                            <li class="header__navbar-item"><h3>HỆ THỐNG CỬA HÀNG THÚ CƯNG PET MART</h3></li>
+                        </ul>
+                        <ul class="header__navbar-list2">
+                            <li class="header__navbar-item"><a href="https://www.facebook.com/petmartvietnam"><i class="fa-brands fa-facebook"></i></a></li>
+                            <li class="header__navbar-item"><a href="https://www.instagram.com/petmartvietnam"><i class="fa-brands fa-instagram"></i></a></li>
+                            <li class="header__navbar-item"><a href="https://www.tiktok.com/petmartvietnam"><i class="fa-brands fa-tiktok"></i></a></li>
+                            <li class="header__navbar-item"><a href="https://x.com/i/flow/login?redirect_after_login=%2Fpetmartvietnam"><i class="fa-brands fa-x-twitter"></i></a></li>
+                            <li class="header__navbar-item"> <a href="https://www.youtube.com/petmartvietnam"><i class="fa-brands fa-youtube"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+
+
+            <div class="bottom-header">
+                <div class="grid">
+                    <nav class="header__botbar">
+                        <ul class="header__navbar-list1">
+                            <li class="header__navbar-item"><a href="@Url.Action("Index","Home")"><img id="logo" src="~/Content/img/logo.jpg" alt=""></a></li>
+                        </ul>
+                        <ul class="header__navbar-list3">
+                            <li class="header__navbar-item"><input type="text" id="search" placeholder="    Tìm kiếm thông tin tại đây"></li>
+                            <li class="header__navbar-item"><i class="fa-solid fa-magnifying-glass"></i></li>
+                            <!-- <li class="header__navbar-item"><i id="menu" class="fa-solid fa-bars"></i>menu</li> -->
+                            <li class="header__navbar-item1"><a href="@Url.Action("Cart","ShoppingCart/Cart")"><img src="~/Content/img/cart.jpg" alt=""></a></li>
+
+                        </ul>
+                    </nav>
+
+                    <!-- <nav class="header__botbar2">
+                     <ul class="hedaer__botbar2-list">
+                         <li class="header__botbar2-items"><a style="font-size: 25px;" href="">Đặt mua hàng</a></li>
+                         <li class="header__botbar2-items"><a href="">Các thương hiệu</a></li>
+                         <li class="header__botbar2-items"><a href="">Dịch vụ thú cưng</a></li>
+                         <li class="header__botbar2-items"><a href="">Tạp chí thú cưng</a></li>
+                         <li class="header__botbar2-items"><a href="">Hệ thống cửa hàng</a></li>
+                     </ul>
+                </nav> -->
+                </div>
+
+            </div>
+        </div>
+
+       
+
+            @RenderBody()
+
+        </div>
+    <div class="footer">
+        <div class="footer-bot">
+            <ul class="footer-bot-items"><i class="fa-solid fa-phone"></i> Tổng đài: 028.7106.9906</ul>
+            <ul class="footer-bot-items"><i class="fa-solid fa-message"></i> Gửi tin nhắn</ul>
+            <ul class="footer-bot-items"><i class="fa-solid fa-pen-to-square"></i> Liên hệ kinh doanh</ul>
+            <ul class="footer-bot-items"><a href="@Url.Action("Index","Home")"><i class="fa-solid fa-arrow-up"></i> Lên đầu trang</a></ul>
+        </div>
+
+        <div class="footer-main">
+            <ul class="footer-main-left">
+                <ul class="footer-main-item"><a href=""><b>Giới thiệu</b></a></ul>
+                <ul class="footer-main-item"><a href=""><b>Khách hàng</b></a></ul>
+                <ul class="footer-main-item"><a href=""><b>Tuyển dụng</b></a></ul>
+                <ul class="footer-main-item"><a href=""><b>Giao hàng</b></a></ul>
+                <ul class="footer-main-item"><a href=""><b>Tích điểm</b></a></ul>
+                <ul class="footer-main-item"><a href=""><b>Đổi trả</b></a></ul>
+            </ul>
+
+            <ul class="footer-main-right">
+                <ul class="footer-main-item1"><i class="fa-brands fa-facebook"></i></ul>
+                <ul class="footer-main-item1"><i class="fa-brands fa-instagram"></i></ul>
+                <ul class="footer-main-item1"><i class="fa-brands fa-tiktok"></i></ul>
+                <ul class="footer-main-item1"><i class="fa-brands fa-square-x-twitter"></i></ul>
+                <ul class="footer-main-item1"><i class="fa-brands fa-youtube"></i></ul>
+            </ul>
+
+
+        </div>
+        <ul class="footer-main-bottom">
+            <div class="fotter-bottom-item2"><img src="~/Content/img/ft1.jpg" alt=""></div>
+            <div class="fotter-bottom-item3"><img src="~/Content/img/ft2.jpg" alt=""></div>
+            <div class="fotter-bottom-item4"><img src="~/Content/img/ft3.jpg" alt=""></div>
+            <div class="fotter-bottom-item5"><img src="~/Content/img/ft4.jpg" alt=""></div>
+        </ul>
+
+        <hr>
+
+        <p class="bottom-text">Nội dung và hình ảnh các bài viết trên petmart.vn đã được đăng ký bản quyền <b>Digital Millennium Copyright Act (DMCA)</b>  theo tiêu chuẩn <b>CC BY-ND 4.0 DEED</b>. Vui lòng dẫn nguồn khi sao chép các bài viết từ trang này.</p>
+        <p class="bottom-text">2024 © <b>CÔNG TY PET MART VIỆT NAM</b> - Giấy phép ĐKKD số <b>0106683363</b></p>
+    </div>
+
+    </div>
+</body>
+</html>
