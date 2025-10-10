@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f750e2ae28de4a1c81962f5c23988d3d" Name="Diagram1">
+        <EntityTypeShape EntityType="CSDL_PetShopModel.ChiTietDonHang" Width="1.5" PointX="7.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSDL_PetShopModel.ChucNang" Width="1.5" PointX="8.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSDL_PetShopModel.DonHang" Width="1.5" PointX="5.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSDL_PetShopModel.Employee" Width="1.5" PointX="11.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSDL_PetShopModel.KhachHang" Width="1.5" PointX="3.125" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSDL_PetShopModel.Loai" Width="1.5" PointX="12.875" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSDL_PetShopModel.PhanQuyen" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSDL_PetShopModel.SanPham" Width="1.5" PointX="10.125" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSDL_PetShopModel.User" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="CSDL_PetShopModel.FK__ChiTietDo__DonHa__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="CSDL_PetShopModel.FK__ChiTietDo__SanPh__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="CSDL_PetShopModel.FK__PhanQuyen__RoleI__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="CSDL_PetShopModel.FK__DonHang__KhachHa__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="CSDL_PetShopModel.FK__KhachHang__UserI__15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="CSDL_PetShopModel.FK__SanPham__LoaiID__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="CSDL_PetShopModel.FK__PhanQuyen__UserI__276EDEB3" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
