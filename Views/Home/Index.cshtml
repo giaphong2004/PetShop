@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebsiteBanHang.Models.SanPham>
+﻿@model IEnumerable<WebsiteBanHang.Data.SanPham>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -48,22 +48,22 @@
 
         <div class="hotdeal-grid">
             <!-- 1 item -->
-            @foreach (var item in Model)
+            @foreach (var sanPham in Model)
             {
                 <div class="hotdeal-card">
 
-                    <a href="@Url.Action("Detail","Detail" ,new {id =item.IdSP })" class="img-wrap">
-                        <img src="~/Content/img/@item.img" alt="Tên Sản Phẩm">
+                    <a href="@Url.Action("Detail","Detail" ,new {id =sanPham.ID })" class="img-wrap">
+                        <img src="~/Content/img/@sanPham.Img" alt="Tên Sản Phẩm">
                         <span class="badge-sale">-30%</span>
                         <button class="cart-overlay" aria-label="Thêm vào giỏ">
                             <i class="fa-solid fa-cart-shopping"></i>
                         </button>
                     </a>
 
-                    <h3 class="prod-name"><a href="#">@item.TenSP</a></h3>
+                    <h3 class="prod-name"><a href="#">@sanPham.TenSP</a></h3>
 
                     <div class="card-footer">
-                        <span class="price">@item.GiaSP <span>₫</span></span>
+                        <span class="price">@sanPham.GiaSP.ToString("N0") <span>₫</span></span>
                         <button class="btn-like" aria-label="Yêu thích">
                             <i class="fa-regular fa-heart"></i>
                         </button>

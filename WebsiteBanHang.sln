@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.34601.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsiteBanHang", "WebsiteBanHang.csproj", "{1A23D37E-2E30-4730-A82C-A79117E286CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsiteBanHang.Data", "..\WebsiteBanHang.Data\WebsiteBanHang.Data.csproj", "{F52444CA-C121-4D45-9EB0-5089B108BF1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebsiteBanHang.Business", "..\WebsiteBanHang.Business\WebsiteBanHang.Business.csproj", "{1262D51A-686C-4B45-946B-D8E9AAF3ACC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{1A23D37E-2E30-4730-A82C-A79117E286CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A23D37E-2E30-4730-A82C-A79117E286CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A23D37E-2E30-4730-A82C-A79117E286CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F52444CA-C121-4D45-9EB0-5089B108BF1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52444CA-C121-4D45-9EB0-5089B108BF1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F52444CA-C121-4D45-9EB0-5089B108BF1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F52444CA-C121-4D45-9EB0-5089B108BF1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1262D51A-686C-4B45-946B-D8E9AAF3ACC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1262D51A-686C-4B45-946B-D8E9AAF3ACC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1262D51A-686C-4B45-946B-D8E9AAF3ACC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1262D51A-686C-4B45-946B-D8E9AAF3ACC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

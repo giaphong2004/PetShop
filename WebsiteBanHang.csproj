@@ -138,44 +138,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CartItem.cs" />
-    <Compile Include="Models\ChucNang.cs">
-      <DependentUpon>ProductDBContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Loai.cs">
-      <DependentUpon>ProductDBContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Order.cs">
-      <DependentUpon>ProductDBContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrderSP.cs">
-      <DependentUpon>ProductDBContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PhanQuyen.cs">
-      <DependentUpon>ProductDBContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductDBContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductDBContext.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductDBContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductDBContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductDBContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductDBContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SanPham.cs">
-      <DependentUpon>ProductDBContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>ProductDBContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -339,23 +301,6 @@
     <Content Include="LayoutAdmin\partials\_navbar.html" />
     <Content Include="LayoutAdmin\partials\_sidebar.html" />
     <Content Include="LayoutAdmin\screenshot.jpg" />
-    <Content Include="Models\ProductDBContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ProductDBContext.Context.cs</LastGenOutput>
-      <DependentUpon>ProductDBContext.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\ProductDBContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductDBContext.edmx</DependentUpon>
-      <LastGenOutput>ProductDBContext.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\ProductDBContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProductDBContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ProductDBContext.edmx.diagram">
-      <DependentUpon>ProductDBContext.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="LayoutAdmin\.DS_Store" />
@@ -501,6 +446,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\js\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\NhanVien\" />
   </ItemGroup>
   <ItemGroup>
@@ -510,6 +456,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebsiteBanHang.Business\WebsiteBanHang.Business.csproj">
+      <Project>{1262d51a-686c-4b45-946b-d8e9aaf3acc0}</Project>
+      <Name>WebsiteBanHang.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebsiteBanHang.Data\WebsiteBanHang.Data.csproj">
+      <Project>{f52444ca-c121-4d45-9eb0-5089b108bf1b}</Project>
+      <Name>WebsiteBanHang.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

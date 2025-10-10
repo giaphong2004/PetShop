@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using WebsiteBanHang.Models;
-
-
+using WebsiteBanHang.Business;
+using WebsiteBanHang.Data;
 
 namespace WebsiteBanHang.Controllers
 {
@@ -13,10 +9,9 @@ namespace WebsiteBanHang.Controllers
     {
         public ActionResult Index()
         {
-            CSDL_PetShopEntities db = new CSDL_PetShopEntities();
-            //lấy ra danh sách các sản phẩm
-            List<SanPham> ketqua  = db.SanPhams.Take(10).ToList();
-            return View(ketqua);
+            SanPhamService SanPhamService = new SanPhamService();
+            List<SanPham> danhsachSanPham = SanPhamService.LayTatCaSanPham();
+            return View(danhsachSanPham);
         }
 
         public ActionResult About()
