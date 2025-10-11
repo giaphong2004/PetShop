@@ -1,0 +1,136 @@
+.shopping-cart-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.cart-item-card {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .cart-item-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+.product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 1.5rem;
+}
+
+.product-details {
+    flex-grow: 1;
+    width:80%;
+}
+
+.product-title {
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.product-price {
+    font-weight: 500;
+    color: #3498db;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    min-width: 130px;
+    justify-content: center;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0 0.5rem;
+}
+
+.quantity-btn {
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.remove-btn {
+    color: #e74c3c;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+}
+
+.item-total-price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    min-width: 120px;
+    text-align: right;
+}
+
+.order-summary-card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 20px;
+}
+
+.summary-title {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.summary-total {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #e74c3c;
+}
+
+.btn-checkout {
+    background: linear-gradient(45deg, #2ecc71, #28b463);
+    border: none;
+    font-weight: 500;
+    padding: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+}
+
+    .btn-checkout:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 20px rgba(46, 204, 113, 0.6);
+    }
+
+.empty-cart-container {
+    text-align: center;
+    padding: 5rem 2rem;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.empty-cart-icon {
+    font-size: 5rem;
+    color: #3498db;
+}

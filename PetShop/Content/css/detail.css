@@ -1,34 +1,107 @@
-body {
-    background-color: #f8f9fa; /* Light gray background */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.product-card {
+.product-container {
     background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    padding: 2.5rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    overflow: hidden;
 }
 
-.product-image {
-    border-radius: 10px;
+.product-image-main {
+    border-radius: 15px;
     object-fit: cover;
     width: 100%;
-    max-height: 500px;
+    border: 1px solid #eee;
+    aspect-ratio: 1 / 1;
+}
+
+.product-title {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.product-price-wrapper {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
 }
 
 .product-price {
-    color: #0d6efd; /* Bootstrap primary color */
+    font-size: 3.5rem;
+    /* Increased font size for better visibility */
     font-weight: 700;
+    color: #e74c3c;
+    /* A vibrant price color */
+    line-height: 1;
 }
 
-.accordion-button:not(.collapsed) {
-    color: #0c63e4;
-    background-color: #e7f1ff;
+.btn-add-to-cart {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
 }
 
-.accordion-body p {
-    white-space: pre-wrap; /* Preserves line breaks from your model data */
+    .btn-add-to-cart:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 20px rgba(52, 152, 219, 0.6);
+    }
+
+.policy-section {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid #e9ecef;
+    margin-top: 1.5rem;
+}
+
+.policy-item {
+    font-size: 0.85rem;
+    color: #555;
+}
+
+    .policy-item i {
+        color: #3498db;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+/* --- Info Tabs Styling --- */
+.product-info-tabs {
+    margin-top: 3rem;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #7f8c8d;
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+}
+
+    .nav-tabs .nav-link.active {
+        border-bottom-color: #3498db;
+        color: #2c3e50;
+        background-color: transparent;
+    }
+
+.tab-content {
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 0 0 12px 12px;
+    border: 1px solid #e9ecef;
+    border-top: none;
+}
+
+.tab-pane p {
+    white-space: pre-wrap;
+    line-height: 1.8;
+    color: #34495e;
 }

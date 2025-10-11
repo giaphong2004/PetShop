@@ -17,5 +17,10 @@ namespace WebsiteBanHang.Business
             // Truy cập vào bảng SanPhams trong DB, và chuyển nó thành một danh sách (List)
             return _db.SanPhams.ToList();
         }
+        public SanPham LaySanPhamTheoId(int id)
+        {
+            // Dùng phương thức .Find() của Entity Framework để tìm một đối tượng
+            return _db.SanPhams.Find(id);
+        }
     }
 }

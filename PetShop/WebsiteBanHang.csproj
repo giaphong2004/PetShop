@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,8 +159,9 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\base.css" />
-    <Content Include="Content\css\cart.css" />
+    <Content Include="Content\css\shoppingcart.css" />
     <Content Include="Content\css\detail.css" />
+    <Content Include="Content\css\layout.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\success.css" />
     <Content Include="Content\img\c1.jpg" />
@@ -441,12 +443,13 @@
     <Content Include="Views\ShoppingCart\Succes.cshtml" />
     <Content Include="Views\Accounts\Signup.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\js\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\NhanVien\" />
   </ItemGroup>
   <ItemGroup>
