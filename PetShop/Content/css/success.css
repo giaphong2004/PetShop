@@ -1,106 +1,122 @@
+.success-icon {
+    font-size: 4rem;
+    color: #198754; /* Bootstrap success color */
+}
+
+/* --- Animation Styles --- */
 .loader {
-    width: fit-content;
-    height: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
 }
 
 .truckWrapper {
-    width: 200px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    align-items: center;
-    justify-content: flex-end;
-    overflow-x: hidden;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    animation: drive 7s linear infinite;
 }
-/* truck upper body */
+
 .truckBody {
-    width: 130px;
-    height: fit-content;
-    margin-bottom: 6px;
-    animation: motion 1s linear infinite;
-}
-/* truck suspension animation*/
-@keyframes motion {
-    0% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(3px);
-    }
-
-    100% {
-        transform: translateY(0px);
-    }
-}
-/* truck's tires */
-.truckTires {
-    width: 130px;
-    height: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px 10px 0px 15px;
     position: absolute;
     bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 198px;
 }
 
-    .truckTires svg {
-        width: 24px;
+.truckTires {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 198px;
+}
+
+    .truckTires .tiresvg {
+        position: absolute;
+        width: 30px;
+        animation: spin 1s linear infinite;
     }
 
+        .truckTires .tiresvg:first-child {
+            left: 25px;
+        }
+
+        .truckTires .tiresvg:last-child {
+            right: 40px;
+        }
+
 .road {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
     width: 100%;
-    height: 1.5px;
-    background-color: #282828;
-    position: relative;
-    bottom: 0;
-    align-self: flex-end;
-    border-radius: 3px;
+    height: 3px;
+    background-color: #333;
 }
 
     .road::before {
         content: "";
         position: absolute;
-        width: 20px;
+        width: 200%;
         height: 100%;
-        background-color: #282828;
-        right: -50%;
-        border-radius: 3px;
-        animation: roadAnimation 1.4s linear infinite;
-        border-left: 10px solid white;
-    }
-
-    .road::after {
-        content: "";
-        position: absolute;
-        width: 10px;
-        height: 100%;
-        background-color: #282828;
-        right: -65%;
-        border-radius: 3px;
-        animation: roadAnimation 1.4s linear infinite;
-        border-left: 4px solid white;
+        background-image: linear-gradient(90deg, #333 50%, transparent 50%);
+        background-size: 20px 3px;
+        animation: road 1s linear infinite;
     }
 
 .lampPost {
     position: absolute;
-    bottom: 0;
-    right: -90%;
-    height: 90px;
-    animation: roadAnimation 1.4s linear infinite;
+    bottom: 20px;
+    right: -50px; /* Start off-screen */
+    height: 120px;
+    animation: lamp 7s linear infinite;
 }
 
-@keyframes roadAnimation {
+@keyframes drive {
+    from {
+        left: -198px; /* Start completely off-screen to the left */
+    }
+
+    to {
+        left: 100%; /* End when the wrapper's left edge hits the parent's right edge, pushing the truck completely off-screen */
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes road {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-20px);
+    }
+}
+
+@keyframes lamp {
     0% {
         transform: translateX(0px);
     }
 
     100% {
-        transform: translateX(-350px);
+        transform: translateX(-1500px);
     }
 }

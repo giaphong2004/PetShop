@@ -1,0 +1,22 @@
+.card {
+    border: groove;
+    border-radius: 1rem; /* Bo góc nhiều hơn */
+}
+
+.form-floating label {
+    color: #6c757d;
+}
+
+.product-thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.summary-card h4, .form-card h4 {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}

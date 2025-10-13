@@ -75,7 +75,6 @@ namespace WebsiteBanHang.Controllers
             if (quantity < 1)
             {
                 // Gọi hàm xóa (sẽ tạo ở bước sau) hoặc xử lý xóa tại đây
-                // Tạm thời, chúng ta sẽ không cho phép số lượng dưới 1
                 quantity = 1;
             }
 
@@ -103,12 +102,29 @@ namespace WebsiteBanHang.Controllers
             // Trả về kết quả dưới dạng JSON để JavaScript có thể xử lý
             var result = new
             {
-                itemTotal = newItemTotal, // Thành tiền của sản phẩm vừa cập nhật
-                cartTotal = newTongTien,  // Tổng tiền mới của cả giỏ hàng
-                quantity = quantity       // Số lượng mới
+                itemTotal = newItemTotal, 
+                cartTotal = newTongTien,  
+                quantity = quantity       
             };
 
             return Json(result);
+        }
+        public ActionResult RemoveFromCart(int id)
+        {
+            List<CartItem> cart = Session["Cart"] as List<CartItem>;
+            
+            if(cart != null)
+            {
+                CartItem itemRemove = cart.FirstOrDefault(item => item.SanPham.ID == id);
+
+                if(itemRemove != null)
+                {
+                    cart.Remove(itemRemove);
+
+                    Session["Cart"] = cart;
+                }
+            }
+            return RedirectToAction("Index");
         }
     }
 }
