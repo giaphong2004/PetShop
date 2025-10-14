@@ -47,13 +47,44 @@
                     </div>
 
                     <!-- Giỏ hàng và nút đăng nhập bên phải -->
-                    <a href="#" class="text-white ms-auto position-relative">
+                    <a href="@Url.Action("Index","ShoppingCart")" class="text-white ms-auto position-relative">
                         <i class="fa-solid fa-cart-shopping fs-4"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        @*<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             3
-                        </span>
+                        </span>*@
                     </a>
-                    <button  class="btn btn-custom mx-4"><a href="@Url.Action("Login","Accounts/Login")"> Đăng nhập </a></button>
+                    @* Kiểm tra xem người dùng đã được xác thực (đăng nhập) hay chưa *@
+                    @if (Request.IsAuthenticated)
+                    {
+                       <div class="dropdown ms-4">
+                           @* THAY THẾ: Nội dung text bằng một icon người dùng *@
+                           <a class="dropdown-toggle text-white" href="#" role="button" id="userDropdownMenu" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+                               <i class="fas fa-user-circle fs-4"></i> @* Icon người dùng *@
+                           </a>
+
+                           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
+                               @* Thêm dòng này để hiển thị tên người dùng bên trong menu *@
+                               <li><span class="dropdown-item-text text-center"><strong>@(Session["FullName"] ?? User.Identity.Name)</strong></span></li>
+                               <li><hr class="dropdown-divider"></li>
+
+                               <li>
+                                   @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                   {
+                                       @Html.AntiForgeryToken()
+                                       <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">
+                                           <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                                       </a>
+                                   }
+                               </li>
+                           </ul>
+                       </div>
+                    }
+                    else
+                    {
+                        @* NẾU CHƯA ĐĂNG NHẬP: Hiển thị nút Đăng nhập như cũ *@
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-outline-light mx-4">Đăng nhập</a>
+                    }
+
 
                 </nav>
             </div>
@@ -100,6 +131,6 @@
         </p>
     </footer>
     @Scripts.Render("~/bundles/custom")
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

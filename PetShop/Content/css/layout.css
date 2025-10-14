@@ -12,6 +12,12 @@ body {
   position: relative;      /* cho phép định vị icon theo góc phải */
 }
 
+.dropdown-item-text {
+    padding:0 !important;
+}
+.dropdown-menu {
+    transform: translate(115px, 27px)!important;
+}
 .text-center p {
     color: white;
     font-size: 0.95rem;
