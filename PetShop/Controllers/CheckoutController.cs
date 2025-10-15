@@ -5,12 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using WebsiteBanHang.Models;
 using WebsiteBanHang.Data;
+using WebsiteBanHang.Business;
 
 namespace WebsiteBanHang.Controllers
 {
     public class CheckoutController : Controller
     {
         private CSDL_PetShopEntities _db = new CSDL_PetShopEntities();
+        private UserService _userService = new UserService();
         // GET: Checkout
         public ActionResult Index()
         {
@@ -44,6 +46,16 @@ namespace WebsiteBanHang.Controllers
                         Email = Email,
                         DiaChi = DiaChi
                     };
+
+                    //KIỂM TRA NẾU NGƯỜI DÙNG ĐÃ ĐĂNG NHẬP
+                    if (Request.IsAuthenticated) 
+                    {
+                        var user = _userService.GetUserByUsername(User.Identity.Name);
+                        if (user != null)
+                        {
+                            khachHang.UserID = user.ID;
+                        }
+                    }
                     _db.KhachHangs.Add(khachHang);
                     _db.SaveChanges(); // Lưu để lấy được ID của khách hàng mới
 

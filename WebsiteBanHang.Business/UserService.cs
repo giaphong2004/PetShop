@@ -17,7 +17,7 @@ namespace WebsiteBanHang.Business
             return _db.Users.Any(u => u.UserName == userName);
         }
 
-        public User RegisterUser(string userName,string password,string fullName)
+        public User RegisterUser(string userName, string password, string fullName)
         {
             string hashedPassWork = BCrypt.HashPassword(password);
 
@@ -34,17 +34,25 @@ namespace WebsiteBanHang.Business
             return newUser;
         }
 
-        public User Login(string userName, string password) 
+        public User Login(string userName, string password)
         {
             var user = _db.Users.FirstOrDefault(u => u.UserName == userName);
             if (user != null)
             {
-                if (BCrypt.Verify(password, user.PasswordHash)) 
-                { 
+                if (BCrypt.Verify(password, user.PasswordHash))
+                {
                     return user;
                 }
             }
             return null;
         }
+
+        public User GetUserByUsername(string username)
+        {
+            {
+                return _db.Users.FirstOrDefault(u => u.UserName == username);
+            }
+        }
     }
 }
+

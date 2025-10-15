@@ -50,11 +50,11 @@ namespace WebsiteBanHang.Controllers
             // 4. Lưu lại giỏ hàng vào Session
             Session["Cart"] = cart;
 
-            // 5. Chuyển hướng người dùng đến trang xem giỏ hàng (chúng ta sẽ tạo ở bước sau)
+            // 5. Chuyển hướng người dùng đến trang xem giỏ hàng
             return RedirectToAction("Index");
         }
 
-        // Action Index để hiển thị giỏ hàng (sẽ làm ở bước sau)
+        
         public ActionResult Index()
         {
             List<CartItem> cart = Session["Cart"] as List<CartItem>;
