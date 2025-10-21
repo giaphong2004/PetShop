@@ -1,0 +1,95 @@
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.content-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.card-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.table thead th {
+    border: none;
+    font-weight: 600;
+    color: #6C757D;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    background-color: #f8f9fa;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+    padding: 1rem;
+}
+
+.actions-cell a {
+    color: #6C757D;
+    padding: 0.25rem 0.5rem;
+    text-decoration: none;
+    margin: 0 0.25rem;
+}
+
+.actions-cell a:hover {
+    color: #212529;
+}
+
+.status-tag {
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+.status-dagiao {
+    background-color: #198754;
+}
+
+.status-dangxuly {
+    background-color: #0d6efd;
+}
+
+.status-danggiao {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.status-dahuy {
+    background-color: #dc3545;
+}
+
+.card-footer-nav {
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #6C757D;
+}

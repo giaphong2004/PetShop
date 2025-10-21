@@ -1,0 +1,156 @@
+﻿@model IEnumerable<WebsiteBanHang.Data.DonHang>
+
+@{
+    ViewBag.Title = "Quản lý Đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Areas/Admin/Content/css/qlydonhang.css" rel="stylesheet" />
+}
+
+<header class="main-header">
+    <h1 class="header-title">Quản lý Đơn hàng</h1>
+</header>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="content-card">
+    <div class="card-toolbar">
+        @using (Html.BeginForm("Index", "DonHang", FormMethod.Get, new { @class = "d-flex flex-wrap gap-2 w-100" }))
+        {
+            <div class="input-group" style="max-width: 300px;">
+                <span class="input-group-text bg-white border-end-0"><i class="fas fa-search"></i></span>
+                <input type="text" name="searchTerm" class="form-control border-start-0" 
+                       placeholder="Tìm theo Mã ĐH hoặc Tên KH..." value="@ViewBag.SearchTerm">
+            </div>
+            
+            <select name="status" class="form-select mx-4" style="max-width: 200px;">
+                <option value="">Tất cả trạng thái</option>
+                <option value="Đang xử lý" @(ViewBag.Status == "Đang xử lý" ? "selected" : "")>Đang xử lý</option>
+                <option value="Đang giao" @(ViewBag.Status == "Đang giao" ? "selected" : "")>Đang giao</option>
+                <option value="Đã giao" @(ViewBag.Status == "Đã giao" ? "selected" : "")>Đã giao</option>
+                <option value="Đã hủy" @(ViewBag.Status == "Đã hủy" ? "selected" : "")>Đã hủy</option>
+            </select>
+            
+            <input type="date" name="dateFilter" class="form-control" style="max-width: 200px;" value="@ViewBag.DateFilter">
+            
+            <button type="submit" class="btn btn-primary mx-4">
+                <i class="fas fa-filter me-1 "></i> Lọc
+            </button>
+            
+            if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string) || !string.IsNullOrEmpty(ViewBag.Status as string) || !string.IsNullOrEmpty(ViewBag.DateFilter as string))
+            {
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-1"></i> Xóa bộ lọc
+                </a>
+            }
+        }
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>MÃ ĐƠN HÀNG</th>
+                    <th>TÊN KHÁCH HÀNG</th>
+                    <th>NGÀY ĐẶT</th>
+                    <th>TỔNG TIỀN</th>
+                    <th>TRẠNG THÁI</th>
+                    <th class="text-center">HÀNH ĐỘNG</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var order in Model)
+                    {
+                        decimal tongTien = 0;
+                        if (order.ChiTietDonHangs != null)
+                        {
+                            foreach (var ct in order.ChiTietDonHangs)
+                            {
+                                tongTien += (ct.SoLuong ?? 0) * (ct.DonGia ?? 0);
+                            }
+                        }
+
+                        var statusClass = "";
+                        switch (order.TrangThai?.ToLower())
+                        {
+                            case "đã giao":
+                                statusClass = "status-dagiao";
+                                break;
+                            case "đang giao":
+                                statusClass = "status-danggiao";
+                                break;
+                            case "đang xử lý":
+                                statusClass = "status-dangxuly";
+                                break;
+                            case "đã hủy":
+                                statusClass = "status-dahuy";
+                                break;
+                            default:
+                                statusClass = "status-dangxuly";
+                                break;
+                        }
+
+                        <tr>
+                            <td><strong>#@order.ID</strong></td>
+                            <td>@(order.KhachHang != null ? order.KhachHang.TenKH : "N/A")</td>
+                            <td>@(order.NgayDat.HasValue ? order.NgayDat.Value.ToString("dd/MM/yyyy HH:mm") : "N/A")</td>
+                            <td><strong>@tongTien.ToString("N0") ₫</strong></td>
+                            <td><span class="status-tag @statusClass">@order.TrangThai</span></td>
+                            <td class="text-center actions-cell">
+                                <a href="@Url.Action("Details", new { id = order.ID })" title="Xem chi tiết">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="@Url.Action("Edit", new { id = order.ID })" title="Chỉnh sửa">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a href="#" onclick="deleteOrder(@order.ID)" class="text-danger" title="Xóa">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-5">
+                            <i class="fas fa-inbox fa-3x mb-3 d-block"></i>
+                            <p>Không tìm thấy đơn hàng nào</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="card-footer-nav">
+            <span>Tổng số: <strong>@Model.Count()</strong> đơn hàng</span>
+        </div>
+    }
+</div>
+
+<!-- Form ẩn để xóa đơn hàng -->
+<form id="deleteForm" method="post" style="display:none;">
+    @Html.AntiForgeryToken()
+</form>
+

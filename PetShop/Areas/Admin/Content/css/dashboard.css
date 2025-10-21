@@ -1,0 +1,151 @@
+
+    /* Main Content Styles */
+    .main-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .header-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .header-actions .icon-btn {
+        font-size: 1.2rem;
+        color: var(--text-muted-light);
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* KPI Card Styles */
+    .kpi-card {
+        background-color: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        transition: all 0.3s;
+    }
+
+    .kpi-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    }
+
+    .kpi-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .kpi-icon.blue {
+        background-color: #e7f1ff;
+        color: #0d6efd;
+    }
+
+    .kpi-icon.green {
+        background-color: #e8f5e9;
+        color: #198754;
+    }
+
+    .kpi-icon.orange {
+        background-color: #fff8e1;
+        color: #ff9800;
+    }
+
+    .kpi-icon.red {
+        background-color: #ffeeee;
+        color: #dc3545;
+    }
+
+    .kpi-info h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .kpi-info p {
+        margin: 0;
+        color: var(--text-muted-light);
+    }
+
+    /* Chart & Table Card Styles */
+    .content-card {
+        background-color: white;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .card-header-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 350px;
+        width: 100%;
+    }
+
+    .table thead th {
+        border-bottom-width: 1px;
+        font-weight: 600;
+        color: var(--text-muted-light);
+        text-transform: uppercase;
+        font-size: 0.8rem;
+    }
+
+    .table tbody tr {
+        transition: background-color 0.2s;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .table td,
+    .table th {
+        vertical-align: middle;
+    }
+
+    /* Status Tags */
+    .status-tag {
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-block;
+    }
+
+    .status-completed {
+        background-color: #d1e7dd;
+        color: #0f5132;
+    }
+
+    .status-pending {
+        background-color: #fff3cd;
+        color: #664d03;
+    }
+
+    .status-canceled {
+        background-color: #f8d7da;
+        color: #842029;
+    }

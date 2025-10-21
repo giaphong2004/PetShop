@@ -1,3 +1,295 @@
-﻿
-<h2>Admin Dashboard</h2>
-<p>Chào mừng đến với trang quản trị.</p>
+﻿@{
+    ViewBag.Title = "Bảng điều khiển";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Areas/Admin/Content/css/dashboard.css" rel="stylesheet" />
+}
+
+
+<header class="main-header">
+    <h1 class="header-title">Bảng điều khiển</h1>
+    <div class="header-actions">
+        <button class="icon-btn"><i class="fas fa-search"></i></button>
+        <button class="icon-btn"><i class="fas fa-bell"></i></button>
+        <button class="icon-btn"><i class="fas fa-user-circle"></i></button>
+    </div>
+</header>
+
+<!-- KPI Cards -->
+<div class="row g-4">
+    <div class="col-xl-3 col-md-6">
+        <div class="kpi-card">
+            <div class="kpi-icon blue"><i class="fas fa-dollar-sign"></i></div>
+            <div class="kpi-info">
+                <h2>@ViewBag.TodayRevenue.ToString("N0") ₫</h2>
+                <p>Doanh thu hôm nay</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="kpi-card">
+            <div class="kpi-icon green"><i class="fas fa-shopping-basket"></i></div>
+            <div class="kpi-info">
+                <h2>@ViewBag.NewOrders</h2>
+                <p>Đơn hàng hôm nay</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="kpi-card">
+            <div class="kpi-icon orange"><i class="fas fa-user-plus"></i></div>
+            <div class="kpi-info">
+                <h2>@ViewBag.NewCustomers</h2>
+                <p>Tổng khách hàng</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="kpi-card">
+            <div class="kpi-icon red"><i class="fas fa-box"></i></div>
+            <div class="kpi-info">
+                <h2>@ViewBag.TotalProducts</h2>
+                <p>Tổng sản phẩm</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="content-card">
+            <h3 class="card-header-title">Doanh thu 3 tháng gần nhất</h3>
+            <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="content-card">
+            <h3 class="card-header-title">Thống kê sản phẩm theo loại</h3>
+            <div class="chart-container">
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Đơn hàng gần nhất -->
+<div class="content-card">
+    <h3 class="card-header-title">Đơn hàng gần nhất</h3>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>MÃ ĐƠN HÀNG</th>
+                    <th>TÊN KHÁCH HÀNG</th>
+                    <th>NGÀY ĐẶT</th>
+                    <th>TỔNG TIỀN</th>
+                    <th>TRẠNG THÁI</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var recentOrders = ViewBag.RecentOrders as List<WebsiteBanHang.Data.DonHang>;
+                }
+                @if (recentOrders != null && recentOrders.Any())
+                {
+                    foreach (var order in recentOrders)
+                    {
+                        decimal tongTien = 0;
+                        if (order.ChiTietDonHangs != null)
+                        {
+                            foreach (var ct in order.ChiTietDonHangs)
+                            {
+                                tongTien += (ct.SoLuong ?? 0) * (ct.DonGia ?? 0);
+                            }
+                        }
+
+                        var statusClass = "";
+
+                        switch (order.TrangThai?.ToLower())
+                        {
+                            case "đã giao":
+                                statusClass = "status-completed";
+                                break;
+                            case "đang giao":
+                            case "đang xử lý":
+                                statusClass = "status-pending";
+                                break;
+                            case "đã hủy":
+                                statusClass = "status-canceled";
+                                break;
+                            default:
+                                statusClass = "status-pending";
+                                break;
+                        }
+
+                        <tr>
+                            <td>#@order.ID</td>
+                            <td>@(order.KhachHang != null ? order.KhachHang.TenKH : "N/A")</td>
+                            <td>@(order.NgayDat.HasValue ? order.NgayDat.Value.ToString("dd/MM/yyyy HH:mm") : "N/A")</td>
+                            <td>@tongTien.ToString("N0") ₫</td>
+                            <td><span class="status-tag @statusClass">@order.TrangThai</span></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">Chưa có đơn hàng nào</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Revenue Analytics Chart (Line Chart) - Dữ liệu thực 3 tháng gần nhất
+            var revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            
+            @{
+                var revenueStats = ViewBag.RevenueStats as List<WebsiteBanHang.Models.MonthRevenueViewModel>;
+                var revenueLabels = new List<string>();
+                var revenueData = new List<decimal>();
+                
+                if (revenueStats != null && revenueStats.Any())
+                {
+                    foreach (var stat in revenueStats)
+                    {
+                        revenueLabels.Add(stat.MonthName);
+                        revenueData.Add(stat.Revenue);
+                    }
+                }
+                else
+                {
+                    // Dữ liệu mặc định
+                    revenueLabels.Add("Tháng 1");
+                    revenueLabels.Add("Tháng 2");
+                    revenueLabels.Add("Tháng 3");
+                    revenueData.Add(0);
+                    revenueData.Add(0);
+                    revenueData.Add(0);
+                }
+            }
+
+            var revenueLabelsJson = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(revenueLabels));
+            var revenueDataJson = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(revenueData));
+
+            var revenueChart = new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: revenueLabelsJson,
+                    datasets: [{
+                        label: 'Doanh thu (₫)',
+                        data: revenueDataJson,
+                        backgroundColor: 'rgba(0, 59, 149, 0.1)',
+                        borderColor: '#003B95',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value, index, ticks) {
+                                    return value.toLocaleString('vi-VN') + ' ₫';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Doanh thu: ' + context.parsed.y.toLocaleString('vi-VN') + ' ₫';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Category Statistics Chart (Doughnut Chart) - Dữ liệu thực từ database
+            var categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            
+            @{
+                var categoryStats = ViewBag.CategoryStats as List<WebsiteBanHang.Models.CategoryStatViewModel>;
+                var categoryLabels = new List<string>();
+                var categoryData = new List<int>();
+                
+                if (categoryStats != null && categoryStats.Any())
+                {
+                    foreach (var cat in categoryStats)
+                    {
+                        categoryLabels.Add(cat.TenLoai);
+                        categoryData.Add(cat.SoLuong);
+                    }
+                }
+                else
+                {
+                    // Dữ liệu mặc định nếu không có dữ liệu
+                    categoryLabels.Add("Chưa có dữ liệu");
+                    categoryData.Add(1);
+                }
+            }
+
+            var categoryLabelsJson = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(categoryLabels));
+            var categoryDataJson = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(categoryData));
+
+            // Tạo màu sắc động cho các loại sản phẩm
+            var colors = [
+                '#003B95', '#4dabf7', '#adb5bd', '#ffc107', 
+                '#ff6b6b', '#51cf66', '#ff922b', '#845ef7',
+                '#20c997', '#f06595', '#94d82d', '#fcc419'
+            ];
+
+            var categoryChart = new Chart(categoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: categoryLabelsJson,
+                    datasets: [{
+                        label: 'Số lượng sản phẩm',
+                        data: categoryDataJson,
+                        backgroundColor: colors.slice(0, categoryLabelsJson.length),
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.parsed + ' sản phẩm';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,54 @@
+
+    .order-details-card {
+        background-color: white;
+        border-radius: 0.75rem;
+        padding: 2rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #003B95;
+    }
+
+    .info-row {
+        margin-bottom: 0.75rem;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #6c757d;
+        min-width: 150px;
+        display: inline-block;
+    }
+
+    .status-tag {
+        padding: 0.35rem 0.85rem;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: white;
+    }
+
+    .status-dagiao { background-color: #198754; }
+    .status-dangxuly { background-color: #0d6efd; }
+    .status-danggiao { background-color: #ffc107; color: #212529; }
+    .status-dahuy { background-color: #dc3545; }
+
+    .product-table th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        color: #6c757d;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+    }
+
+    .total-section {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        margin-top: 1rem;
+    }
