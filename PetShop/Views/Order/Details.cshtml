@@ -1,76 +1,107 @@
 ﻿@model WebsiteBanHang.Models.OrderDetailsViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Hóa đơn chi tiết - #" + Model.DonHang.ID;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h2>Hóa đơn chi tiết</h2>
-            <strong>Mã đơn hàng:</strong> #@Model.DonHang.ID <br>
-            <strong>Ngày đặt:</strong> @Model.DonHang.NgayDat.Value.ToString("dd/MM/yyyy HH:mm")
-        </div>
-        <div class="card-body">
-            <div class="row mb-4">
-                <div class="col-sm-6">
-                    <h5 class="mb-3">Thông tin khách hàng:</h5>
-                    <div><strong>@Model.KhachHang.TenKH</strong></div>
-                    <div>Địa chỉ: @Model.KhachHang.DiaChi</div>
-                    <div>Email: @Model.KhachHang.Email</div>
-                    <div>Điện thoại: @Model.KhachHang.SDT</div>
-                </div>
-            </div>
+@section Styles {
+    <link rel="stylesheet" href="~/Content/css/invoice.css">
+}
 
-            <div class="table-responsive-sm">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th class="center">#</th>
-                            <th>Sản phẩm</th>
-                            <th class="right">Đơn giá</th>
-                            <th class="center">Số lượng</th>
-                            <th class="right">Thành tiền</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{ int counter = 1; }
-                        @foreach (var item in Model.chiTietDonHangs)
-                        {
-                            <tr>
-                                <td class="center">@(counter++)</td>
-                                <td class="left strong">@item.SanPham.TenSP</td>
-                                <td class="right">@item.DonGia.Value.ToString("N0") ₫</td>
-                                <td class="center">@item.SoLuong</td>
-                                <td class="right">@((item.SoLuong * item.DonGia).Value.ToString("N0")) ₫</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+<div class="container">
+    <div class="invoice-container" id="invoice">
+        <!-- Header -->
+        <header class="invoice-header row">
+            <div class="col-6">
+                <div class="logo">PetMart</div>
+                <p class="text-muted mb-0">Mang những điều tốt nhất đến thú cưng của bạn.</p>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-sm-5 ml-auto">
-                    <table class="table table-clear">
-                        <tbody>
-                            <tr>
-                                <td class="left">
-                                    <strong class="text-dark">Tổng cộng</strong>
-                                </td>
-                                <td class="right">
-                                    <strong class="text-dark">
-                                        @Model.chiTietDonHangs.Sum(ct => ct.SoLuong * ct.DonGia).Value.ToString("N0") ₫
-                                    </strong>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="col-6 invoice-details">
+                <h2>HÓA ĐƠN</h2>
+                <p class="mb-0"><strong>Mã hóa đơn:</strong> #@Model.DonHang.ID</p>
+                <p class="mb-0"><strong>Ngày xuất:</strong> @Model.DonHang.NgayDat.Value.ToString("dd/MM/yyyy HH:mm")</p>
+            </div>
+        </header>
+
+        <!-- Customer and Company Info -->
+        <section class="row my-4">
+            <div class="col-6">
+                <h6 class="section-title">TỪ:</h6>
+                <div class="info-block">
+                    <p class="mb-1"><strong>Cửa hàng thú cưng PetMart</strong></p>
+                    <p class="mb-1">588 Đường Cách Mạng Tháng 8, Phường Nhiêu Lộc, Quận 3, TP.HCM</p>
+                    <p class="mb-1">support@petmart.com</p>
+                    <p class="mb-0">034.8616.252</p>
                 </div>
             </div>
-        </div>
+            <div class="col-6 text-end">
+                <h6 class="section-title">ĐẾN:</h6>
+                <div class="info-block">
+                    <p class="mb-1"><strong>@Model.KhachHang.TenKH</strong></p>
+                    <p class="mb-1">@Model.KhachHang.DiaChi</p>
+                    <p class="mb-1">@Model.KhachHang.Email</p>
+                    <p class="mb-0">@Model.KhachHang.SDT</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Invoice Table -->
+        <section>
+            <table class="table table-bordered invoice-table">
+                <thead>
+                    <tr>
+                        <th>Mô tả sản phẩm</th>
+                        <th class="text-center">Số lượng</th>
+                        <th class="text-center">Đơn giá</th>
+                        <th class="text-center">Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.chiTietDonHangs)
+                    {
+                        <tr>
+                            <td>
+                                <div class="product-name">@item.SanPham.TenSP</div>
+                                <div class="product-id">Mã sản phẩm: #@item.SanPham.ID</div>
+                            </td>
+                            <td class="text-center">
+                                <strong>@item.SoLuong</strong>
+                            </td>
+                            <td class="text-center">@item.DonGia.Value.ToString("N0") ₫</td>
+                            <td class="text-center">
+                                <strong>@((item.SoLuong * item.DonGia).Value.ToString("N0")) ₫</strong>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Totals -->
+        <section class="row justify-content-end">
+            <div class="col-md-5 totals-section">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Tạm tính:</span>
+                    <span><strong>@Model.chiTietDonHangs.Sum(ct => ct.SoLuong * ct.DonGia).Value.ToString("N0") ₫</strong></span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Phí vận chuyển:</span>
+                    <span><strong>Miễn phí</strong></span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <strong style="font-size: 1.2rem;">Tổng cộng:</strong>
+                    <span class="grand-total">@Model.chiTietDonHangs.Sum(ct => ct.SoLuong * ct.DonGia).Value.ToString("N0") ₫</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="invoice-footer text-center text-muted">
+            <span class="mb-2"><strong>Cảm ơn quý khách đã mua sắm tại PetMart!</strong></span>
+            <br />
+            <span class="mb-0">Nếu có bất kỳ câu hỏi nào, vui lòng liên hệ bộ phận hỗ trợ của chúng tôi.</span>
+        </footer>
     </div>
 </div>
-
-<p class="mt-4">
-    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary"><< Quay lại trang chủ</a>
-</p>
