@@ -4,48 +4,100 @@
     ViewBag.Title = "Lịch sử mua hàng";
 }
 
-<h2>Lịch sử mua hàng</h2>
-<hr />
+@section Styles {
+    <link rel="stylesheet" href="~/Content/css/purchasehistory.css">
+}
 
-@if (Model.Any())
-{
-    <table class="table table-hover table-bordered">
-        <thead class="thead-light">
-            <tr>
-                <th>
-                    Mã đơn hàng
-                </th>
-                <th>
-                    Ngày đặt
-                </th>
-                <th>
-                    Trạng thái
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+<div class="order-history-container">
+    <h1 class="page-title">Lịch sử mua hàng</h1>
+
+    @if (Model.Any())
+    {
+        foreach (var order in Model)
+        {
+            var tongTien = order.ChiTietDonHangs.Sum(ct => (ct.SoLuong ?? 0) * (ct.DonGia ?? 0));
+            var statusClass = "";
+
+            switch (order.TrangThai?.ToLower())
             {
-                <tr>
-                    <td>
-                        #@Html.DisplayFor(modelItem => item.ID)
-                    </td>
-                    <td>
-                        @item.NgayDat.Value.ToString("dd/MM/yyyy HH:mm")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TrangThai)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Xem chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-info btn-sm" })
-                    </td>
-                </tr>
+                case "đang giao":
+                    statusClass = "status-danggiao";
+                    break;
+                case "đã giao":
+                    statusClass = "status-dagiao";
+                    break;
+                case "đã hủy":
+                    statusClass = "status-dahuy";
+                    break;
+                default:
+                    statusClass = "status-danggiao";
+                    break;
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <div class="alert alert-info">Bạn chưa có đơn hàng nào.</div>
-}
+
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-info">
+                        <h6><strong>Mã đơn hàng:</strong> #@order.ID</h6>
+                        <p>Đặt ngày: @order.NgayDat.Value.ToString("dd/MM/yyyy HH:mm")</p>
+                    </div>
+                    <span class="status-tag @statusClass">@order.TrangThai</span>
+                </div>
+
+                <div class="order-body">
+                    @if (order.ChiTietDonHangs.Any())
+                    {
+                        var displayItems = order.ChiTietDonHangs.Take(3);
+                        var remainingCount = order.ChiTietDonHangs.Count() - 3;
+
+                        foreach (var item in displayItems)
+                        {
+                            <div class="product-item">
+                                <img src="@Url.Content("~/Content/img/" + item.SanPham.Img)"
+                                     alt="@item.SanPham.TenSP"
+                                     class="product-image"
+                                     onerror="this.src='https://placehold.co/70x70/EFEFEF/333333?text=IMG'">
+                                <div class="product-info">
+                                    <div class="product-name">@item.SanPham.TenSP</div>
+                                    <div class="product-quantity">Số lượng: @item.SoLuong</div>
+                                </div>
+                                <div class="product-price">
+                                    @((item.SoLuong * item.DonGia).Value.ToString("N0")) ₫
+                                </div>
+                            </div>
+                        }
+
+                        if (remainingCount > 0)
+                        {
+                            <div class="text-muted" style="font-size: 0.875rem; padding-top: 0.5rem;">
+                                <i class="fas fa-plus-circle"></i> Và @remainingCount sản phẩm khác...
+                            </div>
+                        }
+                    }
+                </div>
+
+                <div class="order-footer">
+                    <div class="order-total">
+                        TỔNG CỘNG: <span class="amount">@tongTien.ToString("N0") ₫</span>
+                    </div>
+                    <div>
+                        <a href="@Url.Action("Details", "Order", new { id = order.ID })"
+                           class="btn btn-outline-primary btn-sm btn-view-detail">
+                            <i class="fas fa-file-invoice"></i> Xem chi tiết
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="empty-state">
+            <i class="fas fa-shopping-bag"></i>
+            <h4>Bạn chưa có đơn hàng nào</h4>
+            <p class="text-muted">Hãy bắt đầu mua sắm để tạo đơn hàng đầu tiên của bạn!</p>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary mt-3">
+                <i class="fas fa-shopping-cart"></i> Bắt đầu mua sắm
+            </a>
+        </div>
+    }
+</div>
