@@ -51,7 +51,8 @@ namespace WebsiteBanHang.Controllers
             User user = _userService.Login(username, password);
             if(user != null)
             {
-                FormsAuthentication.SetAuthCookie(username, false);
+                FormsAuthentication.SetAuthCookie(user.UserName, false);
+
                 Session["FullName"] = user.TenNguoiDung;
                 if (Url.IsLocalUrl(returnUrl))
                 {
