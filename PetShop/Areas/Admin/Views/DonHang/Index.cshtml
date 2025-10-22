@@ -13,32 +13,16 @@
     <h1 class="header-title">Quản lý Đơn hàng</h1>
 </header>
 
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-}
-
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-}
-
 <div class="content-card">
     <div class="card-toolbar">
         @using (Html.BeginForm("Index", "DonHang", FormMethod.Get, new { @class = "d-flex flex-wrap gap-2 w-100" }))
         {
             <div class="input-group" style="max-width: 300px;">
                 <span class="input-group-text bg-white border-end-0"><i class="fas fa-search"></i></span>
-                <input type="text" name="searchTerm" class="form-control border-start-0" 
+                <input type="text" name="searchTerm" class="form-control border-start-0"
                        placeholder="Tìm theo Mã ĐH hoặc Tên KH..." value="@ViewBag.SearchTerm">
             </div>
-            
+
             <select name="status" class="form-select mx-4" style="max-width: 200px;">
                 <option value="">Tất cả trạng thái</option>
                 <option value="Đang xử lý" @(ViewBag.Status == "Đang xử lý" ? "selected" : "")>Đang xử lý</option>
@@ -46,13 +30,13 @@
                 <option value="Đã giao" @(ViewBag.Status == "Đã giao" ? "selected" : "")>Đã giao</option>
                 <option value="Đã hủy" @(ViewBag.Status == "Đã hủy" ? "selected" : "")>Đã hủy</option>
             </select>
-            
+
             <input type="date" name="dateFilter" class="form-control" style="max-width: 200px;" value="@ViewBag.DateFilter">
-            
+
             <button type="submit" class="btn btn-primary mx-4">
                 <i class="fas fa-filter me-1 "></i> Lọc
             </button>
-            
+
             if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string) || !string.IsNullOrEmpty(ViewBag.Status as string) || !string.IsNullOrEmpty(ViewBag.DateFilter as string))
             {
                 <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
@@ -121,9 +105,14 @@
                                 <a href="@Url.Action("Edit", new { id = order.ID })" title="Chỉnh sửa">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="#" onclick="deleteOrder(@order.ID)" class="text-danger" title="Xóa">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
+                                @using (Html.BeginForm("Delete", "DonHang", new { id = order.ID }, FormMethod.Post, new { @class = "d-inline delete-form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="button" class="btn btn-link text-danger p-0 delete-btn actions-cell" data-order-id="@order.ID"
+                                            style="border:none; background:none;" title="Xóa">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                }
                             </td>
                         </tr>
                     }
@@ -149,8 +138,22 @@
     }
 </div>
 
-<!-- Form ẩn để xóa đơn hàng -->
-<form id="deleteForm" method="post" style="display:none;">
-    @Html.AntiForgeryToken()
-</form>
+@section Scripts {
+    <script src="~/Areas/Admin/Content/js/qlydonhang.js"></script>
+    <script>
+        // Hiển thị thông báo từ TempData
+        @if (TempData["Success"] != null)
+        {
+            <text>
+            showNotification('success', '@Html.Raw(TempData["Success"])');
+            </text>
+        }
 
+        @if (TempData["Error"] != null)
+        {
+            <text>
+            showNotification('error', '@Html.Raw(TempData["Error"])');
+            </text>
+        }
+    </script>
+}

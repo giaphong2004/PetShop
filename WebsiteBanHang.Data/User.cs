@@ -30,5 +30,6 @@ namespace WebsiteBanHang.Data
         public virtual ICollection<KhachHang> KhachHangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhanQuyen> PhanQuyens { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

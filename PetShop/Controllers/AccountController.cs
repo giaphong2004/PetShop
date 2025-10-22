@@ -38,22 +38,41 @@ namespace WebsiteBanHang.Controllers
         {
             return View();
         }
+        // GET: Account/Login
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string username,string password,string returnUrl)
+        public ActionResult Login(string username, string password, string returnUrl)
         {
             User user = _userService.Login(username, password);
-            if(user != null)
+            if (user != null)
             {
-                FormsAuthentication.SetAuthCookie(user.UserName, false);
+                // Tạo FormsAuthenticationTicket với role
+                var roles = user.IsAdmin == true ? "Admin" : "User";
+
+                var ticket = new FormsAuthenticationTicket(
+                    1,                              // version
+                    user.UserName,                  // name
+                    DateTime.Now,                   // issue time
+                    DateTime.Now.AddHours(2),       // expiration time
+                    false,                          // persistent
+                    roles,                          // user data (roles)
+                    FormsAuthentication.FormsCookiePath
+                );
+
+                // Mã hóa ticket
+                var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+                // Tạo cookie
+                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                Response.Cookies.Add(cookie);
 
                 Session["FullName"] = user.TenNguoiDung;
+
                 if (Url.IsLocalUrl(returnUrl))
                 {
                     return Redirect(returnUrl);
@@ -69,6 +88,7 @@ namespace WebsiteBanHang.Controllers
                 return View();
             }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Logout()

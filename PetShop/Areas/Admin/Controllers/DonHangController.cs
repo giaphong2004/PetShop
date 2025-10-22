@@ -16,7 +16,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
         {
             var query = _db.DonHangs.AsQueryable();
 
-            // Tìm ki?m theo mã ??n hàng ho?c tên khách hàng
+            // Tìm kiếm theo mã đơn hàng hoặc tên khách hàng
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 query = query.Where(d => 
@@ -24,13 +24,13 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
                     d.KhachHang.TenKH.Contains(searchTerm));
             }
 
-            // L?c theo tr?ng thái
+            // Lọc theo trạng thái
             if (!string.IsNullOrEmpty(status) && status != "all")
             {
                 query = query.Where(d => d.TrangThai == status);
             }
 
-            // L?c theo ngày
+            // Lọc theo ngày
             if (!string.IsNullOrEmpty(dateFilter))
             {
                 DateTime filterDate;
@@ -76,7 +76,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
 
             ViewBag.StatusList = new SelectList(new[]
             {
-                 new { Value = "Đang xử lý", Text = "Đang xử lý" },
+                new { Value = "Đang xử lý", Text = "Đang xử lý" },
                 new { Value = "Đang giao", Text = "Đang giao" },
                 new { Value = "Đã giao", Text = "Đã giao" },
                 new { Value = "Đã hủy", Text = "Đã hủy" }
@@ -100,7 +100,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
             {
                 order.TrangThai = TrangThai;
                 _db.SaveChanges();
-                TempData["Success"] = "Cập nhật trạng thái giao hàng thành công!";
+                TempData["Success"] = "Cập nhật trạng thái đơn hàng thành công!";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -120,9 +120,9 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
                 var order = _db.DonHangs.Find(id);
                 if (order != null)
                 {
-                    // Xóa chi ti?t ??n hàng tr??c
+                    // Xóa chi tiết đơn hàng trước
                     _db.ChiTietDonHangs.RemoveRange(order.ChiTietDonHangs);
-                    // Xóa ??n hàng
+                    // Xóa đơn hàng
                     _db.DonHangs.Remove(order);
                     _db.SaveChanges();
                     TempData["Success"] = "Xóa đơn hàng thành công!";
