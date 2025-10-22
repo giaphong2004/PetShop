@@ -1,0 +1,228 @@
+﻿@model WebsiteBanHang.Data.SanPham
+
+@{
+    ViewBag.Title = "Chỉnh sửa sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@section Styles {
+    <style>
+        
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+
+        }
+
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+
+        }
+
+        .content-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control,
+        .form-select {
+            border: 1px solid #ced4da;
+            border-radius: 0.375rem;
+            padding: 0.625rem 0.875rem;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .current-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 0.375rem;
+            border: 1px solid #dee2e6;
+            margin-bottom: 1rem;
+        }
+
+        .image-upload-box {
+            border: 2px dashed #dee2e6;
+            border-radius: 0.375rem;
+            padding: 2rem;
+            text-align: center;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .image-upload-box:hover {
+            border-color: #0d6efd;
+            background-color: #e7f1ff;
+        }
+
+        .image-upload-box i {
+            font-size: 3rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        #imageFile {
+            display: none;
+        }
+
+        #imagePreview {
+            max-width: 300px;
+            max-height: 300px;
+            margin: 1rem auto;
+            border-radius: 0.375rem;
+            display: none;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .btn {
+            padding: 0.625rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+        }
+
+        .text-danger {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .badge-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+    </style>
+}
+
+<header class="main-header">
+    <h1 class="header-title">Chỉnh sửa sản phẩm:</h1>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Quay lại
+    </a>
+</header>
+
+<div class="content-card">
+    @using (Html.BeginForm("Edit", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data", id = "productForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Img)
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TenSP, "Tên sản phẩm")
+
+                    @Html.TextBoxFor(model => model.TenSP, new { @class = "form-control", placeholder = "Nhập tên sản phẩm..." })
+                    @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LoaiID, "Loại sản phẩm")
+
+                    @Html.DropDownList("LoaiID", (SelectList)ViewBag.LoaiList, "-- Chọn loại --", new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.LoaiID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GiaSP, "Giá sản phẩm (₫)")
+
+            @Html.TextBoxFor(model => model.GiaSP, new { @class = "form-control", type = "number", min = "0", step = "1000", placeholder = "0" })
+            @Html.ValidationMessageFor(model => model.GiaSP, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MoTa, "Mô tả sản phẩm")
+            @Html.TextAreaFor(model => model.MoTa, new { @class = "form-control", rows = 4, placeholder = "Nhập mô tả chi tiết..." })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ThanhPhan, "Thành phần")
+            @Html.TextAreaFor(model => model.ThanhPhan, new { @class = "form-control", rows = 3, placeholder = "Nhập thành phần..." })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HDSD, "Hướng dẫn sử dụng")
+            @Html.TextAreaFor(model => model.HDSD, new { @class = "form-control", rows = 3, placeholder = "Nhập hướng dẫn..." })
+        </div>
+
+        <div class="form-group">
+            <label>Hình ảnh sản phẩm</label>
+
+            @if (!string.IsNullOrEmpty(Model.Img))
+            {
+                <div class="text-center">
+                    <p class="mb-2"><strong>Hình ảnh hiện tại:</strong></p>
+                    <img src="@Url.Content("~/Content/img/" + Model.Img)" alt="@Model.TenSP" class="current-image" />
+
+                </div>
+            }
+
+            <label for="imageFile" class="image-upload-box">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p class="mb-0"><strong>Chọn ảnh mới</strong> (tùy chọn)</p>
+                <small class="text-muted">PNG, JPG, JPEG (Tối đa 5MB)</small>
+            </label>
+            <input type="file" id="imageFile" name="imageFile" accept="image/*" />
+            <img id="imagePreview" src="#" alt="Preview" />
+        </div>
+
+        <div class="form-actions">
+            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                <i class="fas fa-times me-2"></i>Hủy
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save me-2"></i>Cập nhật
+            </button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Areas/Admin/Content/js/qlysanpham.js"></script>
+}

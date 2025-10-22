@@ -1,0 +1,133 @@
+﻿@model WebsiteBanHang.Data.SanPham
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var loaiColors = ViewBag.LoaiColors as Dictionary<int, string> ?? new Dictionary<int, string>();
+    var categoryColor = Model.LoaiID.HasValue && loaiColors.ContainsKey(Model.LoaiID.Value) 
+        ? loaiColors[Model.LoaiID.Value] 
+        : "#6c757d";
+}
+
+@section Styles {
+    <link href="~/Areas/Admin/Content/css/ctietsanpham.css" rel="stylesheet" />
+}
+
+<header class="main-header">
+    <h1 class="header-title">Chi tiết sản phẩm</h1>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Quay lại
+    </a>
+</header>
+
+<div class="content-card">
+    <div class="product-header">
+        <h2><i class="fas fa-box me-2"></i>@Model.TenSP</h2>
+        <div class="product-id">Mã sản phẩm: #@Model.ID</div>
+    </div>
+
+    <div class="product-main-info">
+        <div class="product-image-section">
+            @if (!string.IsNullOrEmpty(Model.Img))
+            {
+                <img src="@Url.Content("~/Content/img/" + Model.Img)" 
+                     alt="@Model.TenSP" 
+                     class="product-image-large"
+                     onerror="this.src='https://placehold.co/300x300/EFEFEF/666666?text=No+Image'">
+            }
+            else
+            {
+                <img src="https://placehold.co/300x300/EFEFEF/666666?text=No+Image" 
+                     alt="No Image" 
+                     class="product-image-large">
+            }
+        </div>
+
+        <div class="product-info-section">
+            <div class="info-group">
+                <div class="info-label">Giá bán</div>
+                <p class="price-display">@Model.GiaSP.ToString("N0") ₫</p>
+            </div>
+
+            <div class="info-group">
+                <div class="info-label">Loại sản phẩm</div>
+                @if (Model.Loai != null)
+                {
+                    <span class="category-badge" style="background-color: @categoryColor;">
+                        <i class="fas fa-tag me-1"></i>@Model.Loai.TenLoai
+                    </span>
+                }
+                else
+                {
+                    <span class="empty-content">Chưa phân loại</span>
+                }
+            </div>
+
+            <div class="info-group">
+                <div class="info-label">Mã sản phẩm</div>
+                <div style="font-size: 1.25rem; font-weight: 600;">#@Model.ID</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="details-section">
+        <div class="section-title">
+            <i class="fas fa-align-left"></i>Mô tả sản phẩm
+        </div>
+        <div class="section-content">
+            @if (!string.IsNullOrEmpty(Model.MoTa))
+            {
+                @Model.MoTa
+            }
+            else
+            {
+                <span class="empty-content">Chưa có mô tả cho sản phẩm này.</span>
+            }
+        </div>
+    </div>
+
+    <div class="details-section">
+        <div class="section-title">
+            <i class="fas fa-leaf"></i>Thành phần dinh dưỡng
+        </div>
+        <div class="section-content">
+            @if (!string.IsNullOrEmpty(Model.ThanhPhan))
+            {
+                @Model.ThanhPhan
+            }
+            else
+            {
+                <span class="empty-content">Chưa có thông tin về thành phần.</span>
+            }
+        </div>
+    </div>
+
+    <div class="details-section">
+        <div class="section-title">
+            <i class="fas fa-book"></i>Hướng dẫn sử dụng
+        </div>
+        <div class="section-content">
+            @if (!string.IsNullOrEmpty(Model.HDSD))
+            {
+                @Model.HDSD
+            }
+            else
+            {
+                <span class="empty-content">Chưa có hướng dẫn sử dụng.</span>
+            }
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="@Url.Action("Index")" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Quay lại
+        </a>
+        <a href="@Url.Action("Edit", new { id = Model.ID })" class="btn btn-warning">
+            <i class="fas fa-edit me-2"></i>Chỉnh sửa
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Areas/Admin/Content/js/qlysanpham.js"></script>
+}

@@ -1,0 +1,158 @@
+﻿@model IEnumerable<WebsiteBanHang.Data.SanPham>
+
+@{
+    ViewBag.Title = "Quản lý Sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var loaiColors = ViewBag.LoaiColors as Dictionary<int, string> ?? new Dictionary<int, string>();
+}
+
+@section Styles {
+    <link href="~/Areas/Admin/Content/css/qlysanpham.css" rel="stylesheet" />
+
+}
+
+<header class="main-header">
+    <h1 class="header-title">Quản lý sản phẩm</h1>
+    <a href="@Url.Action("Create")" class="btn btn-primary">
+        <i class="fas fa-plus me-2"></i>Thêm sản phẩm mới
+    </a>
+</header>
+
+<div class="content-card">
+    <div class="card-toolbar">
+        @using (Html.BeginForm("Index", "SanPham", FormMethod.Get, new { @class = "d-flex flex-wrap gap-2 w-100" }))
+        {
+            <div class="input-group" style="max-width: 300px;">
+                <span class="input-group-text bg-white border-end-0"><i class="fas fa-search"></i></span>
+                <input type="text" name="searchTerm" class="form-control border-start-0" 
+                       placeholder="Tìm theo tên sản phẩm..." value="@ViewBag.SearchTerm">
+            </div>
+            
+            <select name="loaiId" class="form-select mx-4" style="max-width: 200px;">
+                <option value="">Tất cả loại sản phẩm</option>
+                @if (ViewBag.LoaiList != null)
+                {
+                    foreach (var loai in ViewBag.LoaiList as IEnumerable<WebsiteBanHang.Data.Loai>)
+                    {
+                        <option value="@loai.ID" @(ViewBag.LoaiId == loai.ID ? "selected" : "")>@loai.TenLoai</option>
+                    }
+                }
+            </select>
+            
+            <button type="submit" class="btn btn-primary mx-4">
+                <i class="fas fa-filter me-1"></i> Lọc
+            </button>
+            
+            if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string) || ViewBag.LoaiId != null)
+            {
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-1"></i> Xóa bộ lọc
+                </a>
+            }
+        }
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>MÃ SẢN PHẨM</th>
+                    <th>HÌNH ẢNH</th>
+                    <th>TÊN SẢN PHẨM</th>
+                    <th class="text-center">GIÁ</th>
+                    <th class="text-center">LOẠI</th>
+
+                    <th class="text-center">HÀNH ĐỘNG</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var product in Model)
+                    {
+                        var categoryColor = product.LoaiID.HasValue && loaiColors.ContainsKey(product.LoaiID.Value) 
+                            ? loaiColors[product.LoaiID.Value] 
+                            : "#6c757d";
+                        
+                        <tr>
+                            <td><strong>#@product.ID</strong></td>
+                            <td>
+                                <img src="@Url.Content("~/Content/img/" + product.Img)"
+                                     alt="@product.TenSP"
+                                     class="product-thumbnail"
+                                     onerror="this.src='https://placehold.co/60x60/EFEFEF/666666?text=No+Img'">
+                            </td>
+                            <td>@product.TenSP</td>
+                            <td class="text-center"><strong>@product.GiaSP.ToString("N0") đ</strong></td>
+                            <td class="text-center">
+                                @if (product.Loai != null)
+                                {
+                                    <span class="category-tag" style="background-color: @categoryColor;">
+                                        @product.Loai.TenLoai
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">N/A</span>
+                                }
+                            </td>
+
+                            <td class="text-center actions-cell">
+                                <a href="@Url.Action("Details", new { id = product.ID })" title="Xem chi tiết">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="@Url.Action("Edit", new { id = product.ID })" title="Chỉnh sửa">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                @using (Html.BeginForm("Delete", "SanPham", new { id = product.ID }, FormMethod.Post, new { @class = "d-inline delete-form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="button" class="btn btn-link text-danger p-0 delete-btn actions-cell" data-product-id="@product.ID"
+                                            style="border:none; background:none;" title="Xóa">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-5">
+                            <i class="fas fa-inbox fa-3x mb-3 d-block"></i>
+                            <p>Không tìm thấy sản phẩm nào</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="card-footer-nav">
+            <span>Tổng số: <strong>@Model.Count()</strong> sản phẩm</span>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="~/Areas/Admin/Content/js/qlysanpham.js"></script>
+    <script>
+        // Hiển thị thông báo từ TempData
+        @if (TempData["Success"] != null)
+        {
+            <text>
+            showNotification('success', '@Html.Raw(TempData["Success"])');
+            </text>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <text>
+            showNotification('error', '@Html.Raw(TempData["Error"])');
+            </text>
+        }
+    </script>
+}
