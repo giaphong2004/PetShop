@@ -47,7 +47,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link sidebar-link" href="#">
+                    <a class="nav-link sidebar-link @(ViewContext.RouteData.Values["controller"].ToString() == "KhachHang" ? "active" : "")"
+                       href="@Url.Action("Index", "KhachHang", new { area = "Admin" })">
                         <i class="fas fa-users icon"></i> Khách hàng
                     </a>
                 </li>
