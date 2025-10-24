@@ -18,7 +18,7 @@
 
 ---
 
-## 🔎 TL;DR — Dành cho HR (5s pitch)
+## 🔎 TL;DR 
 - **Project:** Website bán hàng thú cưng (PetShop) — frontend + backend + admin.  
 - **Vai trò bạn thấy ở đây:** Thiết kế kiến trúc 3-layer, triển khai backend C# ASP.NET MVC, thiết kế DB, tích hợp EF, làm UX cơ bản.  
 - **Impression:** code có cấu trúc, deployable, có quy trình nghiệp vụ (checkout, order history, admin CRUD).
@@ -47,6 +47,7 @@
 
 Sau khi tải về, import file .bak hoặc .sql vào SQL Server Management Studio.
 
+---
 ## 🛠 Quick start 
 **Requirements:** Windows, Visual Studio 2022, .NET Framework 4.8, SQL Server 2012+
 
