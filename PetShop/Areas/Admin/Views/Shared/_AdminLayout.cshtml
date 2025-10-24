@@ -52,13 +52,10 @@
                         <i class="fas fa-users icon"></i> Khách hàng
                     </a>
                 </li>
+               
                 <li class="nav-item">
-                    <a class="nav-link sidebar-link" href="#">
-                        <i class="fas fa-chart-line icon"></i> Phân tích
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link sidebar-link" href="#">
+                    <a class="nav-link sidebar-link @(ViewContext.RouteData.Values["controller"].ToString() == "Settings" ? "active" : "")"
+                       href="@Url.Action("Index", "Settings", new { area = "Admin" })">
                         <i class="fas fa-cog icon"></i> Cài đặt
                     </a>
                 </li>

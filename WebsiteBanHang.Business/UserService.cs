@@ -12,6 +12,7 @@ namespace WebsiteBanHang.Business
     public class UserService
     {
         private CSDL_PetShopEntities _db = new CSDL_PetShopEntities();
+        
         public bool IsUserNameExists(string userName)
         {
             return _db.Users.Any(u => u.UserName == userName);
@@ -49,9 +50,19 @@ namespace WebsiteBanHang.Business
 
         public User GetUserByUsername(string username)
         {
+            return _db.Users.FirstOrDefault(u => u.UserName == username);
+        }
+
+        public bool ChangePassword(string username, string newPassword)
+        {
+            var user = _db.Users.FirstOrDefault(u => u.UserName == username);
+            if (user != null)
             {
-                return _db.Users.FirstOrDefault(u => u.UserName == username);
+                user.PasswordHash = BCrypt.HashPassword(newPassword);
+                _db.SaveChanges();
+                return true;
             }
+            return false;
         }
     }
 }

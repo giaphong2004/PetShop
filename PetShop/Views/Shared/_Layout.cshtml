@@ -49,9 +49,16 @@
                     <!-- Giỏ hàng và nút đăng nhập bên phải -->
                     <a href="@Url.Action("Index","ShoppingCart")" class="text-white ms-auto position-relative">
                         <i class="fa-solid fa-cart-shopping fs-4"></i>
-                        @*<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                3
-                            </span>*@
+                        @{
+                            var cart = Session["Cart"] as List<WebsiteBanHang.Models.CartItem>;
+                            var cartItemCount = cart != null ? cart.Sum(item => item.soLuong) : 0;
+                        }
+                        @if (cartItemCount > 0)
+                        {
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                @cartItemCount
+                            </span>
+                        }
                     </a>
                     @* Kiểm tra xem người dùng đã được xác thực (đăng nhập) hay chưa *@
                     @if (Request.IsAuthenticated)
