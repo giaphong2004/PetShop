@@ -1,69 +1,60 @@
-🐾 PET SHOP – Website Bán Hàng Thú Cưng
+<!-- README.md for PetShop - HR-friendly, copy/paste into repo root -->
 
-Chào mừng bạn đến với dự án PET SHOP!
-Đây là website bán hàng thú cưng mình đang phát triển trong thời gian gần đây. Mình sẽ liên tục cập nhật tiến độ và tính năng tại repo này để mọi người tiện theo dõi.
+<p align="center">
 
-🧭 Tổng Quan Dự Án
+  <img width="900" alt="Screenshot 2025-10-24 144351" src="https://github.com/user-attachments/assets/b3ba590e-3b89-4155-8736-0b8afd7c9e96" />
 
-PET SHOP là một website thương mại điện tử đơn giản mô phỏng mô hình bán hàng online, tập trung vào giao diện thân thiện và luồng nghiệp vụ cơ bản của một web bán hàng.
+</p>
 
-Luồng hoạt động chính:
+# PETSHOP — E-commerce demo (ASP.NET MVC) 🐾
 
-Trang chủ → Xem sản phẩm → Chi tiết sản phẩm → Giỏ hàng → Thanh toán → Xác nhận thông tin → Thanh toán thành công → Xem hóa đơn
+![ASP.NET MVC](https://img.shields.io/badge/ASP.NET_MVC-5-blueviolet.svg)
+![C#](https://img.shields.io/badge/C%23-11.0-512BD4?logo=c-sharp&logoColor=white)
+![Entity Framework](https://img.shields.io/badge/Entity_Framework-6-green.svg)
+![SQL Server](https://img.shields.io/badge/SQL_Server-2012%2B-CC2927?logo=microsoft-sql-server&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white)
 
-Người dùng cũng có thể đăng ký / đăng nhập tài khoản để quản lý đơn hàng của mình.
+> **Mục tiêu:** Demo hệ thống e-commerce hoàn chỉnh để chứng minh tư duy sản phẩm + kỹ năng backend (C#, ASP.NET MVC, EF).
 
-⚙️ Công Nghệ Sử Dụng
+---
 
-Backend: ASP.NET FramWork (C#)
+## 🔎 TL;DR — Dành cho HR (5s pitch)
+- **Project:** Website bán hàng thú cưng (PetShop) — frontend + backend + admin.  
+- **Vai trò bạn thấy ở đây:** Thiết kế kiến trúc 3-layer, triển khai backend C# ASP.NET MVC, thiết kế DB, tích hợp EF, làm UX cơ bản.  
+- **Impression:** code có cấu trúc, deployable, có quy trình nghiệp vụ (checkout, order history, admin CRUD).
 
-Database: SQL Server (hiện mình đang dùng bản 2012, bạn có thể dùng bản khác)
+---
 
-Frontend: HTML, CSS, JavaScript (tham khảo giao diện từ trang chủ Pet Mart)
+## ⭐ Key features (tóm tắt)
+- Product listing, filtering, responsive UI  
+- Cart (Session-based) + Checkout flow  
+- Auth (Forms Auth) & password hashed (BCrypt.Net)  
+- Admin: Product CRUD, Order management, Dashboard  
+- EF6 (Database First), SQL Server
 
-🧩 Cấu Trúc Dự Án
-PetShop/
-│
-├── PetShop/                     → Giao diện chính của website
-├── WebsiteBanHang.Business/     → Xử lý logic & quy tắc nghiệp vụ
-├── WebsiteBanHang.Data/         → Làm việc với Database (Entity, Repository, ...)
-└── README.md                    → File mô tả dự án (chính là file bạn đang đọc 😄)
+---
 
-🖥️ Yêu Cầu Cài Đặt
+## 📸 Visual 
+| Admin | Cart | Checkout |
+|---|---|---|
+|<img width="300" height="1216" alt="image" src="https://github.com/user-attachments/assets/b0554ed0-d988-4e0e-80a0-c39c9fc8e1f4" />|<img width="300" height="979" alt="image" src="https://github.com/user-attachments/assets/146ce5d6-0342-454c-b209-18fe30ae8379" />| <img width="300" height="1513" alt="image" src="https://github.com/user-attachments/assets/7c74a37c-b162-457c-ba43-86d04189fc4b" />
 
-Hệ điều hành: Windows
+---
+## 🗃️ Cơ sở dữ liệu (Database)
 
-Vì dự án sử dụng công nghệ ASP.NET Framework – một nền tảng cũ của Microsoft, nên chỉ chạy ổn định trên Windows.
+📥 Link tải database:
+👉 [Download Database PetShop (Google Drive)](https://drive.google.com/drive/folders/1zucyrLN_a0b2ktKZsobLg5E4dT_Acymn?usp=sharing)
 
-Công cụ:
+Sau khi tải về, import file .bak hoặc .sql vào SQL Server Management Studio.
 
-Visual Studio (khuyên dùng bản 2022 trở lên)
+## 🛠 Quick start 
+**Requirements:** Windows, Visual Studio 2022, .NET Framework 4.8, SQL Server 2012+
 
-.NET Framework SDK
-
-Cơ sở dữ liệu:
-
-SQL Server 2012 trở lên
-
-Import file database từ link: 📦 Google Drive – Database
-
-🚀 Cách Chạy Dự Án
-
-Clone project về máy:
-
+```bash
 git clone https://github.com/giaphong2004/PetShop.git
+# Mở PetShop.sln trong Visual Studio
+# Restore DB từ .bak (link trong thư mục /database hoặc README)
+# Cập nhật connection string trong Web.config & App.config
+# Build -> Run (F5)
 
 
-Mở project trong Visual Studio
-
-Kiểm tra chuỗi kết nối (connection string) trong appsettings.json
-
-Chạy SQL Server và import database
-
-Bấm Run ▶️ để khởi động website
-
-🧠 Ghi Chú Phát Triển
-
-Mình sẽ cập nhật tiến độ và các tính năng mới tại đây sau mỗi giai đoạn.
-
-Dự án hướng đến việc học hỏi, thực hành mô hình 3-layer và làm quen với cách tổ chức code backend rõ ràng.
